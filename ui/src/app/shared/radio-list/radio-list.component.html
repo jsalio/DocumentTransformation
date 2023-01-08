@@ -1,0 +1,7 @@
+<clr-radio-container>
+    <label>{{label|translate}}</label>
+    <clr-radio-wrapper *ngFor="let op of options">
+        <input type="radio" clrRadio name="options2" required [value]="op.value" [(ngModel)]="_option" />
+        <label>{{op.label| translate}}</label>
+    </clr-radio-wrapper>
+</clr-radio-container>

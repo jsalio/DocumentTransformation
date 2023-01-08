@@ -1,0 +1,13 @@
+.wrapper-main {
+    position: absolute;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    z-index: 99;
+    background-color: rgba(0, 0, 0, .5);
+    margin-top: -48px;
+    margin-left: -48px
+}
+
+.loader {
+    padding: 18% 0 0 50%
+}

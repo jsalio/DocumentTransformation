@@ -1,0 +1,103 @@
+<h3>{{'SchedulesSettings'|translate}}
+    <a href="..." role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+        <cds-icon shape="info-circle" size="24"></cds-icon>
+        <span class="tooltip-content">{{'ScheduleSettingsExplains'|translate}}</span>
+    </a>
+</h3>
+<div [formGroup]="scheduleForm">
+
+    <div class="clr-row">
+        <div class="clr-col-4">
+            <clr-select-container>
+                <label>{{ 'workMode'| translate}}</label>
+                <select (change)="listenerChange($event)" formControlName="workMode" clrSelect name="options"
+                    [(ngModel)]="selectedWorkMode" required>
+                    <option *ngFor="let op of workModeOptions" [value]="op.value">{{op.label| translate}}</option>
+                </select>
+            </clr-select-container>
+        </div>
+    </div>
+
+    <div class="clr-row">
+        <div class="clr-col-4">
+            <clr-checkbox-container>
+                <clr-checkbox-wrapper>
+                    <input type="checkbox" formControlName="enableSecondQueue" clrCheckbox name="options1" />
+                    <label>{{'ActiveOnDemandQueue'| translate}}</label>
+                </clr-checkbox-wrapper>
+            </clr-checkbox-container>
+        </div>
+    </div>
+
+    <div class="clr-row" [ngStyle]="{'visibility':isStoptWatchMode() ? 'visible': 'hidden'}">
+        <div class="clr-col-4">
+            <clr-select-container>
+                <label>{{ 'StopwatchMode'| translate}}</label>
+                <select formControlName="timerWorkMode" clrSelect name="options" [(ngModel)]="selectedWatchMode"
+                    required>
+                    <option *ngFor="let op of timerOptions" [value]="op.value">{{op.label|translate}}</option>
+                </select>
+            </clr-select-container>
+        </div>
+    </div>
+
+
+
+    <div class="clr-row"
+        [ngStyle]="{'visibility':isStopWatchModeTimer() ? 'visible': 'hidden','display': isStopWatchModeTimer() ? '' : 'none' }">
+        <div class="clr-col-1">
+
+            <clr-select-container>
+                <label>{{ 'TimeInterval'| translate}}</label>
+                <select formControlName="timeUnit" (change)="listenerChange($event)" clrSelect name="timeUnit"
+                    [(ngModel)]="timeUnit" required>
+                    <option *ngFor="let op of selectorOptions" [value]="op.value">{{op.label|translate}}</option>
+                </select>
+            </clr-select-container>
+            {{timeUnit}}
+
+        </div>
+        <div class="clr-col-1">
+
+            <clr-input-container>
+                <label>{{'Value'| translate}}</label>
+                <input formControlName="interval" type="number" clrInput />
+            </clr-input-container>
+
+        </div>
+    </div>
+
+    <div [ngStyle]="{'visibility':IsSchedule() ? 'visible': 'hidden', 'display': IsSchedule() ? '' : 'none'}">
+        <div class="clr-row">
+            <div class="clr-col-2">
+                <clr-date-container>
+                    <label>
+                        {{'AvailableDate'|translate }}</label>
+                    <input clrDate formControlName="StartDate" type="date" max="2099-12-31" min="1999-12-31" />
+                </clr-date-container>
+            </div>
+        </div>
+        <div class="clr-row">
+            <div class="clr-col-2">
+                <div class="clr-form-control">
+                    <label>{{'StartTimeAt'|translate}}</label>
+                    <input formControlName="TimeInit" class="clr-input" type="time" />
+                </div>
+            </div>
+            <div class="clr-col-2">
+                <div class="clr-form-control">
+                    <label>{{'EndTimeAt'|translate}}</label>
+                    <input formControlName="TimeEnd" class="clr-input" type="time" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clr-row"></div>
+    <div class="clr-row">
+        <div class="clr-col-8">
+            <button *ngIf="touched === false" class="btn btn-primary" disabled>{{'Save'|translate}}</button>
+            <button *ngIf="touched === true" class="btn btn-primary" (click)="onSave()">{{'Save'|translate}}</button>
+            <button class="btn btn-danger" (click)="onCancel()">{{'Cancel'|translate}}</button>
+        </div>
+    </div>
+</div>

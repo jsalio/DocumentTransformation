@@ -1,0 +1,59 @@
+<h3>{{'QueueSettings'|translate}}
+    <a href="..." role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+        <cds-icon shape="info-circle" size="24"></cds-icon>
+        <span class="tooltip-content">{{'QueueSettingsExplains'|translate}}</span>
+    </a>
+</h3>
+<div clrForm [formGroup]="queueForm">
+    <clr-input-container>
+        <label>{{'Server'|translate}}</label>
+        <input formControlName="serverUrl" clrInput type="text" />
+    </clr-input-container>
+    <clr-input-container>
+        <label>{{'QueueName'|translate}}</label>
+        <input formControlName="queueName" clrInput type="text" />
+    </clr-input-container>
+    <clr-input-container>
+        <label>{{'Exchange'| translate}}</label>
+        <input formControlName="exchange" clrInput type="text" name="example" />
+    </clr-input-container>
+    <clr-input-container>
+        <label>{{'UserName'|translate}}</label>
+        <input formControlName="username" clrInput type="text" name="example" />
+    </clr-input-container>
+    <clr-input-container>
+        <label>{{'Password'| translate}}</label>
+        <input formControlName="password" clrInput type="password" name="example" />
+    </clr-input-container>
+    <p>
+        <button (click)="onShowAdvance()"><cds-icon shape="cog"></cds-icon></button>
+    </p>
+    <div *ngIf="showAdvance">
+        <clr-input-container>
+            <label>{{'Virtualhost'|translate}}</label>
+            <input formControlName="virtualHost" formControlName="serverUrl" clrInput type="text" name="example" />
+        </clr-input-container>
+        <clr-input-container>
+            <label>{{'Port'|translate}}</label>
+            <input formControlName="port" clrInput type="number" maxlength="8" name="example" />
+        </clr-input-container>
+        <clr-input-container>
+            <label>{{'PrefetchSize'| translate}}</label>
+            <input formControlName="prefetchSize" clrInput type="number" maxlength="3" name="example" />
+        </clr-input-container>
+        <clr-input-container>
+            <label>{{'PrefetchCount'|translate}}</label>
+            <input formControlName="prefetchCount" clrInput type="number" maxlength="3" name="example" />
+        </clr-input-container>
+        <clr-input-container>
+            <label>{{'Heartbeat'| translate}}</label>
+            <input formControlName="heartbeat" clrInput type="number" maxlength="3" name="example" />
+        </clr-input-container>
+    </div>
+    <div class="clr-row">
+        <div class="clr-col-8">
+            <button (click)="onSave()" class="btn btn-primary">{{'Save'|translate}}</button>
+            <button type="submit" class="btn btn-danger">{{'Cancel'|translate}}</button>
+        </div>
+    </div>
+</div>

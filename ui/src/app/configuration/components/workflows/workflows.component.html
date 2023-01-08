@@ -1,0 +1,92 @@
+<h3>{{'WorkfowWhiteList'|translate}}
+    <a href="..." role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+        <cds-icon shape="info-circle" size="24"></cds-icon>
+        <span class="tooltip-content">{{'WorkflowsWitheListExplains'| translate}}</span>
+    </a>
+</h3>
+
+<div class="clr-row">
+    <div class="clr-col-5">
+        <div class="clr-form-control">
+            <div class="clr-control-container">
+                <div class="clr-input-wrapper">
+                    <cds-icon shape="search"></cds-icon>
+                    <input type="text" id="example" [(ngModel)]="filterLeft" placeholder="Search" class="clr-input"
+                        (change)="onFilter('filterLeft')" />
+                    <cds-icon shape="times" (click)="clearFilterField('filterLeft')"></cds-icon>
+                </div>
+            </div>
+        </div>
+        <clr-datagrid [(clrDgSelected)]="selectedLeft">
+            <clr-dg-placeholder *ngIf="loading">RetrivingDataSet</clr-dg-placeholder>
+            <clr-dg-column>{{'Workflow'|translate}} {{'Available' | translate}}</clr-dg-column>
+            <clr-dg-row [clrDgItem]="user" *ngFor="let user of  (filterLeft !== '' ? filteredLeft: available)">
+                <clr-dg-cell>{{user.name}}</clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-footer>
+                <clr-dg-pagination #pagination [clrDgPageSize]="10">
+                    <clr-dg-page-size #clrDgPageSize [clrPageSizeOptions]="[10,20,50,100]">
+                        <label [for]="clrDgPageSize.pageSizeOptionsId">Items per page</label>
+                    </clr-dg-page-size>
+
+                    <!-- or you can use the clrPageSizeOptionsId input to explicitly set the id: -->
+                    <!-- <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]" clrPageSizeOptionsId="page-size-select-id">
+                        <label for="page-size-select-id">Users per page</label>
+                    </clr-dg-page-size> -->
+
+                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                    of {{pagination.totalItems}} users
+                </clr-dg-pagination>
+            </clr-dg-footer>
+        </clr-datagrid>
+    </div>
+    <div class="clr-col-1">
+        <div style="margin-top: 61px; margin-left:12px">
+            <button class="btn btn-sm" (click)="assignMarkedElements('single right')"> > </button>
+            <button class="btn btn-sm" (click)="assignMarkedElements('single left')">
+                < </button>
+                    <button class="btn btn-sm" (click)="assignMarkedElements('all rigth')"> >> </button>
+                    <button (click)="assignMarkedElements('all left')" class="btn btn-sm">
+                        << </button>
+        </div>
+    </div>
+    <div class="clr-col-5">
+        <div class="clr-form-control">
+            <div class="clr-control-container">
+                <div class="clr-input-wrapper">
+                    <cds-icon shape="search"></cds-icon>
+                    <input type="text" id="example" [(ngModel)]="filterRight" placeholder="Search" class="clr-input"
+                        (change)="onFilter('filterRight')" />
+                    <cds-icon shape="times" (click)="clearFilterField('filterRight')"></cds-icon>
+                </div>
+            </div>
+        </div>
+        <clr-datagrid [(clrDgSelected)]="selectedRigth">
+            <clr-dg-column>{{'Workflow'|translate}} {{'Active' | translate}}</clr-dg-column>
+            <clr-dg-row [clrDgItem]="user" *ngFor="let user of workflows">
+                <clr-dg-cell>{{user.name}}</clr-dg-cell>
+            </clr-dg-row>
+            <clr-dg-footer>
+                <clr-dg-pagination #pagination [clrDgPageSize]="10">
+                    <clr-dg-page-size #clrDgPageSize [clrPageSizeOptions]="[10,20,50,100]">
+                        <label [for]="clrDgPageSize.pageSizeOptionsId">Users per page</label>
+                    </clr-dg-page-size>
+                    <!--
+                    or you can use the clrPageSizeOptionsId input to explicitly set the id:
+                    <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]" clrPageSizeOptionsId="page-size-select-id">
+                        <label for="page-size-select-id">Users per page</label>
+                    </clr-dg-page-size>
+                    -->
+                    {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+                    of {{pagination.totalItems}} users
+                </clr-dg-pagination>
+            </clr-dg-footer>
+        </clr-datagrid>
+    </div>
+</div>
+<div class="clr-row">
+    <div class="clr-col-8">
+        <button class="btn btn-primary" (click)="onSaveChange()">{{'Save'|translate}}</button>
+        <button class="btn btn-danger">{{'Cancel'|translate}}</button>
+    </div>
+</div>

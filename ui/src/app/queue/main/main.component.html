@@ -1,0 +1,49 @@
+<div clrForm [formGroup]="queueForm">
+    <clr-input-container>
+        <label>Server</label>
+        <input formControlName="server" clrInput type="text" />
+    </clr-input-container>
+    <clr-input-container>
+        <label>QueueName</label>
+        <input formControlName="queueName" clrInput type="text" />
+    </clr-input-container>
+    <clr-input-container>
+        <label>Exchange</label>
+        <input formControlName="exchange" clrInput type="text" name="example" />
+    </clr-input-container>
+    <clr-input-container>
+        <label>UserName</label>
+        <input formControlName="username" clrInput type="text" name="example" />
+    </clr-input-container>
+    <clr-input-container>
+        <label>Password</label>
+        <input formControlName="password" clrInput type="password" name="example" />
+    </clr-input-container>
+    <p>
+        <button (click)="onShowAdvance()"><cds-icon shape="cog"></cds-icon></button>
+    </p>
+    <div *ngIf="showAdvance">
+        <clr-input-container>
+            <label>Virtualhost</label>
+            <input formControlName="virtualhost" formControlName="server" clrInput type="text" name="example" />
+        </clr-input-container>
+        <clr-input-container>
+            <label>Port</label>
+            <input formControlName="port" clrInput type="number" maxlength="8" name="example" />
+        </clr-input-container>
+        <clr-input-container>
+            <label>PrefetchSize</label>
+            <input formControlName="prefetchSize" clrInput type="number" maxlength="3" name="example" />
+        </clr-input-container>
+        <clr-input-container>
+            <label>PrefetchCount</label>
+            <input formControlName="prefetch" clrInput type="number" maxlength="3" name="example" />
+        </clr-input-container>
+        <clr-input-container>
+            <label>Heartbeat</label>
+            <input formControlName="heartbeat" clrInput type="number" maxlength="3" name="example" />
+        </clr-input-container>
+    </div>
+    <button class="btn btn-info-outline">{{'Cancel'|translate}}</button>
+    <button type="submit" class="btn btn-success-outline">{{'Save'| translate}}</button>
+</div>

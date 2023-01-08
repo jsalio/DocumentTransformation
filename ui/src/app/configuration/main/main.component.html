@@ -1,0 +1,41 @@
+<clr-tabs>
+    <clr-tab>
+        <button clrTabLink>{{'Schedule' | translate}}</button>
+        <ng-template [(clrIfActive)]="scheduleActive">
+            <clr-tab-content>
+                <app-loading-wrapper></app-loading-wrapper>
+                <app-schedule></app-schedule>
+            </clr-tab-content>
+        </ng-template>
+    </clr-tab>
+
+    <clr-tab>
+        <button clrTabLink>{{'Queue'| translate}}</button>
+        <ng-template [(clrIfActive)]="queueActive">
+            <clr-tab-content>
+                <app-loading-wrapper></app-loading-wrapper>
+                <app-queue></app-queue>
+            </clr-tab-content>
+        </ng-template>
+    </clr-tab>
+
+    <clr-tab>
+        <button clrTabLink>{{'Workflows'| translate}}</button>
+        <ng-template [(clrIfActive)]="workfolowsActive">
+            <clr-tab-content>
+                <app-loading-wrapper></app-loading-wrapper>
+                <app-workflows></app-workflows>
+            </clr-tab-content>
+        </ng-template>
+    </clr-tab>
+
+    <clr-tab>
+        <button clrTabLink>{{'Rules'| translate}}</button>
+        <ng-template [(clrIfActive)]="rulesActive">
+            <clr-tab-content>
+                <app-loading-wrapper></app-loading-wrapper>
+                <app-rules></app-rules>
+            </clr-tab-content>
+        </ng-template>
+    </clr-tab>
+</clr-tabs>

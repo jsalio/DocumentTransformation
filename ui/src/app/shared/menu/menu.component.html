@@ -1,0 +1,13 @@
+<!-- <nav class="sidenav"> -->
+<section class="sidenav-content">
+    <section class="nav-group">
+        <input id="tabexample2" type="checkbox" />
+        <label for="tabexample2">{{'Menu' | translate}}</label>
+        <ul class="nav-list">
+            <li *ngFor="let item of menu">
+                <a [routerLink]="item.link" class="nav-link">{{item.option | translate}}</a>
+            </li>
+        </ul>
+    </section>
+</section>
+<!-- </nav> -->

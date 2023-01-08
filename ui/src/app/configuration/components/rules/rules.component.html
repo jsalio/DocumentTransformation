@@ -1,0 +1,98 @@
+<h3>{{'ServiceRule'|translate}}
+    <a href="..." role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+        <cds-icon shape="info-circle" size="24"></cds-icon>
+        <span class="tooltip-content">{{'ServiceRulesExplains'|translate}}</span>
+    </a>
+</h3>
+<div [formGroup]="rulesForm">
+    <div class="clr-row">
+        <div class="clr-col-4">
+            <clr-checkbox-container>
+                <clr-checkbox-wrapper>
+                    <input type="checkbox" formControlName="enableLog" clrCheckbox name="EnableLog" />
+                    <label>{{'EnableLog'| translate}}</label>
+                </clr-checkbox-wrapper>
+            </clr-checkbox-container>
+        </div>
+    </div>
+    <div class="clr-row">
+        <div class="clr-col-4">
+            <clr-checkbox-container>
+                <clr-checkbox-wrapper>
+                    <input type="checkbox" [(ngModel)]="enableBlockElements" formControlName="blockFailsElemets"
+                        clrCheckbox name="blockFailsElemets" />
+                    <label>{{'BlockFailsElemets'| translate}}</label>
+                </clr-checkbox-wrapper>
+            </clr-checkbox-container>
+        </div>
+    </div>
+    <div class="clr-row"
+        [ngStyle]="{'display': enableBlockElements ? '':'none','visibility': enableBlockElements ? 'visible':'hidden' }">
+        <div class="clr-col-4">
+            <clr-input-container>
+                <label>{{'LimitOfTry'}}</label>
+                <input clrInput type="number" min="2" max="50" [placeholder]="translate('LimitsOfTry')"
+                    formControlName="tryLimits" />
+            </clr-input-container>
+        </div>
+    </div>
+    <div class="clr-row">
+        <div class="clr-col-4">
+            <clr-checkbox-container>
+                <clr-checkbox-wrapper>
+                    <input type="checkbox" formControlName="deleteDocumentAfterSync" clrCheckbox
+                        name="deleteDocumentAfterSync" />
+                    <label>{{'DeletePDfAfterSync'| translate}}</label>
+                </clr-checkbox-wrapper>
+            </clr-checkbox-container>
+        </div>
+    </div>
+    <div class="clr-row">
+        <div class="clr-col-4">
+            <clr-checkbox-container>
+                <clr-checkbox-wrapper>
+                    <input type="checkbox" formControlName="validateBatchConverttion" clrCheckbox
+                        name="validateBatchConverttion" />
+                    <label>{{'ValidateDocumentConvertionAfterUpdate'| translate}}</label>
+                </clr-checkbox-wrapper>
+            </clr-checkbox-container>
+        </div>
+    </div>
+    <div class="clr-row">
+        <div class="clr-col-4">
+            <clr-checkbox-container>
+                <clr-checkbox-wrapper>
+                    <input type="checkbox" formControlName="enableLocalConfig" clrCheckbox name="enableLocalConfig" />
+                    <label>{{'EnableLocalConfg'| translate}}</label>
+                </clr-checkbox-wrapper>
+            </clr-checkbox-container>
+        </div>
+    </div>
+    <div class="clr-row">
+        <div class="clr-col-4">
+            <clr-checkbox-container>
+                <clr-checkbox-wrapper>
+                    <input type="checkbox" formControlName="ValidatePages" clrCheckbox name="validatePages" />
+                    <label>{{'ValidatePagesBeforeInitConvertion'| translate}}</label>
+                </clr-checkbox-wrapper>
+            </clr-checkbox-container>
+        </div>
+    </div>
+    <div class="clr-row">
+        <div class="clr-col-4">
+            <clr-checkbox-container>
+                <clr-checkbox-wrapper>
+                    <input type="checkbox" formControlName="enableConsole" clrCheckbox name="validatePages" />
+                    <label>{{'EnableRealTimeConsole'| translate}}</label>
+                </clr-checkbox-wrapper>
+            </clr-checkbox-container>
+        </div>
+    </div>
+    <div class="clr-row"></div>
+    <div class="clr-row">
+        <div class="clr-col-8">
+            <button class="btn btn-primary" (click)="onSave()">{{'Save'|translate}}</button>
+            <button class="btn btn-danger">{{'Cancel'|translate}}</button>
+        </div>
+    </div>
+</div>
