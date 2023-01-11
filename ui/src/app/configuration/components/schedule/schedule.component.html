@@ -1,7 +1,7 @@
 <h3>{{'SchedulesSettings'|translate}}
     <a href="..." role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
         <cds-icon shape="info-circle" size="24"></cds-icon>
-        <span class="tooltip-content">{{'ScheduleSettingsExplains'|translate}}</span>
+        <span class="tooltip-content">{{'ScheduleSettingsExplains'|translate}}</span> APK
     </a>
 </h3>
 <div [formGroup]="scheduleForm">
@@ -9,7 +9,7 @@
     <div class="clr-row">
         <div class="clr-col-4">
             <clr-select-container>
-                <label>{{ 'workMode'| translate}}</label>
+                <label>{{ 'workMode'| translate}}</label> N
                 <select (change)="listenerChange($event)" formControlName="workMode" clrSelect name="options"
                     [(ngModel)]="selectedWorkMode" required>
                     <option *ngFor="let op of workModeOptions" [value]="op.value">{{op.label| translate}}</option>

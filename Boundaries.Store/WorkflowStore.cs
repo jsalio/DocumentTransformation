@@ -11,9 +11,9 @@ namespace Boundaries.Store
         {
             return new List<Workflow>
                 {
-                    new Workflow {Id= 1, Name="Workflow 1", Description =""},
-                    new Workflow {Id= 10, Name="Workflow 10", Description =""},
-                    new Workflow {Id= 11, Name="Workflow 11", Description =""},
+                    new Workflow {Handle= 1, Name="Workflow 1", Description =""},
+                    new Workflow {Handle= 10, Name="Workflow 10", Description =""},
+                    new Workflow {Handle= 11, Name="Workflow 11", Description =""},
                 };
         }
 

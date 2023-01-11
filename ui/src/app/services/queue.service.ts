@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class QueueService {
-  server: string = "https://localhost:44353/api/queue";
+  server: string = "https://localhost:44367/api/queue";
   constructor(private http: HttpClient) { }
 
   getQueue = (): Promise<QueueConfiguration> => {

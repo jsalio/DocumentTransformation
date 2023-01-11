@@ -1,6 +1,7 @@
 ﻿using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.Json;
@@ -33,6 +34,14 @@ namespace Boundaries.Request
             _request = new RestRequest(resource, Method);
         }
 
+        public void AddHeaders(ICollection<KeyValuePair<string, string>> headers)
+        {
+            foreach(var header in headers)
+            {
+                _request.AddHeader(header.Key, header.Value);
+            }
+        }
+
         public RequestResponse<T> Execute<T>()
         {
             var response = _restClient.Execute(_request);
@@ -49,7 +58,7 @@ namespace Boundaries.Request
                     //PropertyNamingPolicy = null
                 };
 
-                var x = JsonSerializer.Deserialize<T>(response.Content,options);
+                var x = JsonSerializer.Deserialize<T>(response.Content, options);
 
                 return RequestResponse<T>.BuildResponse(x);
             }

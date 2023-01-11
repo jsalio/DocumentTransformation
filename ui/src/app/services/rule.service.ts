@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class RuleService {
 
-  server: string = "https://localhost:44353/api/Rules";
+  server: string = "https://localhost:44367/api/Rules";
   constructor(private http: HttpClient) { }
 
   getRules = () => {

@@ -4,9 +4,11 @@ using System.Text;
 
 namespace Core.Models
 {
-    public sealed class CaptureApiEndPoints    
+    public sealed class CaptureApiEndPoints
     {
         public string Queue { get; set; }
         public string Worlflow { get; set; }
+        public string XApiKeyValue { get; set; }
+        public string ApiKeyName { get; set; }
     }
 }

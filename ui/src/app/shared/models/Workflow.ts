@@ -1,5 +1,5 @@
 export interface Workflow {
-    id: number;
+    handle: number;
     name: string;
     volId: number;
 }

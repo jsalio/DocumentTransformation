@@ -6,7 +6,7 @@ import { Workflow } from '../shared/models/Workflow';
   providedIn: 'root'
 })
 export class WorkflowService {
-  server: string = "https://localhost:44353/api/workflow";
+  server: string = "https://localhost:44367/api/workflow";
   constructor(private http: HttpClient) { }
 
   loadAvailable = (): Promise<Array<Workflow>> => {

@@ -1,7 +1,7 @@
 .wrapper-main {
     position: absolute;
-    width: -webkit-fill-available;
-    height: -webkit-fill-available;
+    width: -webkit-fill-available -moz-fill-available;
+    height: -webkit-fill-available -moz-fill-available;
     z-index: 99;
     background-color: rgba(0, 0, 0, .5);
     margin-top: -48px;

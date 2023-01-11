@@ -8,7 +8,7 @@ import { WorkMode } from '../shared/models/WorkMode';
   providedIn: 'root'
 })
 export class AppConfigService {
-  server: string = "https://localhost:44353/api/ServiceSetting";
+  server: string = "https://localhost:44367/api/ServiceSetting";
   constructor(private http: HttpClient) { }
 
   getConfig = () => {
