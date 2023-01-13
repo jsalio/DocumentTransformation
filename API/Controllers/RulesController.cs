@@ -10,10 +10,10 @@ namespace DocumentTransformation.Controllers
     [ApiController]
     public class RulesController : BaseController, IRequest<ApplicationRules>
     {
-        private readonly IServiceRule _store;
+        private readonly IRuleRepository _store;
         private ApplicationRules _rules;
 
-        public RulesController(IServiceRule ruleStore)
+        public RulesController(IRuleRepository ruleStore)
         {
             _store = ruleStore;
         }
@@ -36,7 +36,7 @@ namespace DocumentTransformation.Controllers
             Core.UseCase.Rules.SaveChanges getRules = new Core.UseCase.Rules.SaveChanges(_store, this);
             var current = getRules.Execute();
             ValidateResult(current);
-            return Ok(current);
+            return Ok();
         }
 
         ApplicationRules IRequest<ApplicationRules>.BuildRequest()

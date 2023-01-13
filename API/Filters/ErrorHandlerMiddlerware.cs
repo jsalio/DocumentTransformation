@@ -24,6 +24,7 @@ namespace DocumentTransformation.Filters
             {
                 await _next(context);
             }
+            
             catch (Exception error)
             {
                 var response = context.Response;

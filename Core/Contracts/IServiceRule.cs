@@ -1,4 +1,6 @@
 ﻿using Core.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Core.Contracts
 {
@@ -6,6 +8,13 @@ namespace Core.Contracts
     {
         string Save(ApplicationRules queue);
         ApplicationRules GetRules();
+    }
+
+     public interface IRuleRepository
+    {
+        Task<int> Create(ApplicationRules rules);
+        Task<ApplicationRules> GetAll();
+        Task<int> Update(IEnumerable<Rule> rules);
     }
 
 }

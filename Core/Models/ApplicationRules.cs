@@ -15,4 +15,11 @@ namespace Core.Models
         public bool EnableConsole { get; set; }
 
     }
+
+    public sealed class Rule
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Value { get; set; }
+    }
 }

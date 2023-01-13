@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Boundaries.Store;
 using Core.Contracts;
 using Core.Models;
 using DocumentTransformation.Filters;
@@ -10,6 +11,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -29,7 +31,8 @@ namespace DocumentTransformation
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {            services.AddControllers().AddJsonOptions(options =>
+        {
+            services.AddControllers().AddJsonOptions(options =>
             {
                 options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
@@ -43,11 +46,18 @@ namespace DocumentTransformation
             var endPoints = section.Get<CaptureApiEndPoints>();
 
             services.AddSingleton(endPoints);
-            
+
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(
+                Configuration.GetConnectionString("ProdoctivityCaptureDatabase"),
+                ef => ef.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
+            services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
+
+
             services.AddScoped<IQueueSource, Boundaries.Capture.QueueSource>();
             services.AddScoped<IServiceConfigStore, Boundaries.Store.ConfigServiceStore>();
             services.AddScoped<IWorflowStore, Boundaries.Store.WorkflowStore>();
-            services.AddScoped<IServiceRule, Boundaries.Store.ServiceRuleStore>();
+            services.AddScoped<IRuleRepository, Boundaries.Store.Repository.RuleRepository>();
             services.AddScoped<IWorkflowSource, Boundaries.Capture.WorkflowSource>();
 
             services.AddSwaggerGen();

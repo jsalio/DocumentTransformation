@@ -9,9 +9,9 @@ namespace Core.UseCase.Rules
 {
     public class GetRules
     {
-        private readonly IServiceRule _store;
+        private readonly IRuleRepository _store;
 
-        public GetRules(IServiceRule ruleStore)
+        public GetRules(IRuleRepository ruleStore)
         {
             _store = ruleStore;
         }
@@ -20,7 +20,7 @@ namespace Core.UseCase.Rules
         {
             try
             {
-                var dataSet = _store.GetRules();
+                var dataSet = _store.GetAll().Result;
                 return Option.Some<ApplicationRules, Exception>(dataSet);
             }
             catch (Exception e)
