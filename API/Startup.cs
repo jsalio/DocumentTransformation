@@ -56,7 +56,7 @@ namespace DocumentTransformation
 
             services.AddScoped<IQueueSource, Boundaries.Capture.QueueSource>();
             services.AddScoped<IServiceConfigStore, Boundaries.Store.ConfigServiceStore>();
-            services.AddScoped<IWorflowStore, Boundaries.Store.WorkflowStore>();
+            services.AddScoped<IWorkflowRepository, Boundaries.Store.Repository.Workflow>();
             services.AddScoped<IRuleRepository, Boundaries.Store.Repository.RuleRepository>();
             services.AddScoped<IWorkflowSource, Boundaries.Capture.WorkflowSource>();
 

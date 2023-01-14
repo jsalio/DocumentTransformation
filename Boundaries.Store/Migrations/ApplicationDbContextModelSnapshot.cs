@@ -35,7 +35,7 @@ namespace Boundaries.Store.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rule");
+                    b.ToTable("Rules");
                 });
 
             modelBuilder.Entity("Core.Models.ServiceSettings", b =>
@@ -76,7 +76,7 @@ namespace Boundaries.Store.Migrations
 
             modelBuilder.Entity("Core.Models.Workflow", b =>
                 {
-                    b.Property<int>("Handle")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -86,6 +86,9 @@ namespace Boundaries.Store.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Handle")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsActiveQaIndex")
                         .HasColumnType("bit");
@@ -100,9 +103,9 @@ namespace Boundaries.Store.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Handle");
+                    b.HasKey("Id");
 
-                    b.ToTable("Boundaries.Store.IApplicationDbContext.Workflows");
+                    b.ToTable("Workflows");
                 });
 #pragma warning restore 612, 618
         }

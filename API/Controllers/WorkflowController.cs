@@ -11,11 +11,11 @@ namespace DocumentTransformation.Controllers
     [ApiController]
     public class WorkflowController : BaseController,  IRequest<IEnumerable<Workflow>>
     {
-        private readonly IWorflowStore _store;
+        private readonly IWorkflowRepository _store;
         private readonly IWorkflowSource _captureStore;
         private IEnumerable<Workflow> _request;
 
-        public WorkflowController(IWorflowStore worflowStore,IWorkflowSource workflowSource)
+        public WorkflowController(IWorkflowRepository worflowStore,IWorkflowSource workflowSource)
         {
             _store = worflowStore;
             _captureStore = workflowSource;
@@ -45,8 +45,9 @@ namespace DocumentTransformation.Controllers
         {
             _request = workflows;
             Core.UseCase.Workflows.SaveChanges getAll = new Core.UseCase.Workflows.SaveChanges(_store, this);
-            var resukt = getAll.Execute().ValueOrFailure();
-            return Ok(resukt);
+            var resukt = getAll.Execute();
+            ValidateResult(resukt);
+            return Ok(resukt.ValueOrFailure());
         }
 
         IEnumerable<Workflow> IRequest<IEnumerable<Workflow>>.BuildRequest()

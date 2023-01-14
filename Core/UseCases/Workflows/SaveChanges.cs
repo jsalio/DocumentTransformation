@@ -9,10 +9,10 @@ namespace Core.UseCase.Workflows
 {
     public sealed class SaveChanges
     {
-        private readonly IWorflowStore _store;
+        private readonly IWorkflowRepository _store;
         private readonly IRequest<IEnumerable<Workflow>> _request;
 
-        public SaveChanges(IWorflowStore store, IRequest<IEnumerable<Workflow>> request)
+        public SaveChanges(IWorkflowRepository store, IRequest<IEnumerable<Workflow>> request)
         {
             _store = store;
             _request = request;
@@ -32,8 +32,8 @@ namespace Core.UseCase.Workflows
             var request = _request.BuildRequest();
             try
             {
-                var store = _store.Save(request);
-                return Option.Some<string, Exception>(store);
+                var store = _store.SaveMany(request).GetAwaiter().GetResult();
+                return Option.Some<string, Exception>(store.ToString());
             }
             catch (Exception e)
             {

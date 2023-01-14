@@ -17,4 +17,13 @@ namespace Core.Contracts
         Task<int> Update(IEnumerable<Rule> rules);
     }
 
+    public interface IWorkflowRepository
+    {
+        Task<IEnumerable<Workflow>> GetAll();
+        Task<int> Delete(int id);
+        Task<int> DeleteMany(IEnumerable<int> id);
+        Task<int> SaveMany(IEnumerable<Workflow> workflows);
+
+    }
+
 }

@@ -14,23 +14,11 @@ GO
 IF SCHEMA_ID(N'Pdf') IS NULL EXEC(N'CREATE SCHEMA [Pdf];');
 GO
 
-CREATE TABLE [Pdf].[Boundaries.Store.IApplicationDbContext.Workflows] (
-    [Handle] int NOT NULL IDENTITY,
-    [Name] nvarchar(max) NOT NULL,
-    [Description] nvarchar(max) NULL,
-    [IsActiveQaIndex] bit NOT NULL,
-    [IsActiveQaScan] bit NOT NULL,
-    [IsMultipleIndexingActive] bit NOT NULL,
-    [ConvertToPdf] bit NOT NULL,
-    CONSTRAINT [PK_Boundaries.Store.IApplicationDbContext.Workflows] PRIMARY KEY ([Handle])
-);
-GO
-
-CREATE TABLE [Pdf].[Rule] (
+CREATE TABLE [Pdf].[Rules] (
     [Id] int NOT NULL IDENTITY,
     [Name] nvarchar(max) NULL,
     [Value] nvarchar(max) NULL,
-    CONSTRAINT [PK_Rule] PRIMARY KEY ([Id])
+    CONSTRAINT [PK_Rules] PRIMARY KEY ([Id])
 );
 GO
 
@@ -48,8 +36,21 @@ CREATE TABLE [Pdf].[ServiceSettings] (
 );
 GO
 
+CREATE TABLE [Pdf].[Workflows] (
+    [Id] int NOT NULL IDENTITY,
+    [Handle] int NOT NULL,
+    [Name] nvarchar(max) NOT NULL,
+    [Description] nvarchar(max) NULL,
+    [IsActiveQaIndex] bit NOT NULL,
+    [IsActiveQaScan] bit NOT NULL,
+    [IsMultipleIndexingActive] bit NOT NULL,
+    [ConvertToPdf] bit NOT NULL,
+    CONSTRAINT [PK_Workflows] PRIMARY KEY ([Id])
+);
+GO
+
 INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
-VALUES (N'20230112195119_FisrtMigration', N'5.0.17');
+VALUES (N'20230114040607_InitialMigration', N'5.0.17');
 GO
 
 COMMIT;

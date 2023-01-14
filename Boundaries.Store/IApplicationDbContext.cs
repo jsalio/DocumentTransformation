@@ -10,7 +10,7 @@ namespace Boundaries.Store
     public interface IApplicationDbContext
     {
         DbSet<Workflow> Workflows { get; set; }
-        DbSet<Rule> Rule { get; set; }
+        DbSet<Rule> Rules { get; set; }
         DbSet<ServiceSettings> ServiceSettings{ get; set; }
 
         Task<int> SaveChanges();

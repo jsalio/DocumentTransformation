@@ -26,7 +26,7 @@ namespace Boundaries.Store.Repository
 
         async Task<ApplicationRules> IRuleRepository.GetAll()
         {
-            var query = await _context.Rule.ToArrayAsync();
+            var query = await _context.Rules.ToArrayAsync();
             bool.TryParse(query.First(x => x.Name == "EnableLog").Value, out bool enableLog);
             bool.TryParse(query.First(x => x.Name == "LockFailsElements").Value, out bool lockFails);
             int.TryParse(query.First(x => x.Name == "TryLimits").Value, out int tryLimit);
@@ -52,7 +52,7 @@ namespace Boundaries.Store.Repository
         {
             foreach (var rule in rules)
             {
-                var target = _context.Rule.FirstOrDefault(x => x.Name == rule.Name);
+                var target = _context.Rules.FirstOrDefault(x => x.Name == rule.Name);
                 target.Value = rule.Value;
             }
             return await _context.SaveChanges();

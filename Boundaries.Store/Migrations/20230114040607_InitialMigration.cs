@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Boundaries.Store.Migrations
 {
-    public partial class FisrtMigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,26 +11,7 @@ namespace Boundaries.Store.Migrations
                 name: "Pdf");
 
             migrationBuilder.CreateTable(
-                name: "Boundaries.Store.IApplicationDbContext.Workflows",
-                schema: "Pdf",
-                columns: table => new
-                {
-                    Handle = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsActiveQaIndex = table.Column<bool>(type: "bit", nullable: false),
-                    IsActiveQaScan = table.Column<bool>(type: "bit", nullable: false),
-                    IsMultipleIndexingActive = table.Column<bool>(type: "bit", nullable: false),
-                    ConvertToPdf = table.Column<bool>(type: "bit", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Boundaries.Store.IApplicationDbContext.Workflows", x => x.Handle);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Rule",
+                name: "Rules",
                 schema: "Pdf",
                 columns: table => new
                 {
@@ -41,7 +22,7 @@ namespace Boundaries.Store.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Rule", x => x.Id);
+                    table.PrimaryKey("PK_Rules", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,20 +45,40 @@ namespace Boundaries.Store.Migrations
                 {
                     table.PrimaryKey("PK_ServiceSettings", x => x.Id);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Workflows",
+                schema: "Pdf",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Handle = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    IsActiveQaIndex = table.Column<bool>(type: "bit", nullable: false),
+                    IsActiveQaScan = table.Column<bool>(type: "bit", nullable: false),
+                    IsMultipleIndexingActive = table.Column<bool>(type: "bit", nullable: false),
+                    ConvertToPdf = table.Column<bool>(type: "bit", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Workflows", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Boundaries.Store.IApplicationDbContext.Workflows",
-                schema: "Pdf");
-
-            migrationBuilder.DropTable(
-                name: "Rule",
+                name: "Rules",
                 schema: "Pdf");
 
             migrationBuilder.DropTable(
                 name: "ServiceSettings",
+                schema: "Pdf");
+
+            migrationBuilder.DropTable(
+                name: "Workflows",
                 schema: "Pdf");
         }
     }

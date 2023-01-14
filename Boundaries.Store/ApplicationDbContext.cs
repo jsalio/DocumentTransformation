@@ -9,18 +9,14 @@ namespace Boundaries.Store
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
-        public DbSet<Workflow> Workflows { get; set; }
-        public DbSet<Rule> Rule { get ; set; }
+        public DbSet<Workflow> Workflows { get; set; }  
+        public DbSet<Rule> Rules { get ; set; }
         public DbSet<ServiceSettings> ServiceSettings { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
 
         }
-
-        //DbSet<Workflow> IApplicationDbContext.Workflows { get; set; }
-        //DbSet<Rule> IApplicationDbContext.Rules { get; set; }
-        //DbSet<ServiceSettings> IApplicationDbContext.ServiceSettings { get; set; }
 
         async Task<int> IApplicationDbContext.SaveChanges()
         {
@@ -32,7 +28,8 @@ namespace Boundaries.Store
             modelBuilder.HasDefaultSchema("Pdf");
             modelBuilder.Entity<Workflow>(model =>
             {
-                model.HasKey(x => x.Handle);
+                model.HasKey(x => x.Id);
+                model.Property(x => x.Handle).IsRequired();
                 model.Property(x => x.Name).IsRequired();
             }).Entity<ServiceSettings>(model =>
             {

@@ -9,9 +9,9 @@ namespace Core.UseCase.Workflows
 {
     public sealed class GetActiveWorkflows
     {
-        private readonly IWorflowStore _store;
+        private readonly IWorkflowRepository _store;
 
-        public GetActiveWorkflows(IWorflowStore store)
+        public GetActiveWorkflows(IWorkflowRepository store)
         {
             _store = store;
         }
@@ -20,7 +20,7 @@ namespace Core.UseCase.Workflows
         {
             try
             {
-                var query = _store.GetAllActiveWorkflows();
+                var query = _store.GetAll().GetAwaiter().GetResult();
                 return Option.Some<IEnumerable<Workflow>, Exception>(query);
             }
             catch (Exception e)

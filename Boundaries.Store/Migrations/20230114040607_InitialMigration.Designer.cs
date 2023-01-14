@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Boundaries.Store.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230112195119_FisrtMigration")]
-    partial class FisrtMigration
+    [Migration("20230114040607_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -37,7 +37,7 @@ namespace Boundaries.Store.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Rule");
+                    b.ToTable("Rules");
                 });
 
             modelBuilder.Entity("Core.Models.ServiceSettings", b =>
@@ -78,7 +78,7 @@ namespace Boundaries.Store.Migrations
 
             modelBuilder.Entity("Core.Models.Workflow", b =>
                 {
-                    b.Property<int>("Handle")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .UseIdentityColumn();
@@ -88,6 +88,9 @@ namespace Boundaries.Store.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Handle")
+                        .HasColumnType("int");
 
                     b.Property<bool>("IsActiveQaIndex")
                         .HasColumnType("bit");
@@ -102,9 +105,9 @@ namespace Boundaries.Store.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Handle");
+                    b.HasKey("Id");
 
-                    b.ToTable("Boundaries.Store.IApplicationDbContext.Workflows");
+                    b.ToTable("Workflows");
                 });
 #pragma warning restore 612, 618
         }

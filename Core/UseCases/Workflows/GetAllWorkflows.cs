@@ -8,10 +8,10 @@ namespace Core.UseCase.Workflows
 {
     public sealed class GetAllWorkflows
     {
-        private readonly IWorflowStore _store;
+        private readonly IWorkflowRepository _store;
         private readonly IWorkflowSource _captureWorkflowStore;
 
-        public GetAllWorkflows(IWorflowStore store, IWorkflowSource _captureStore)
+        public GetAllWorkflows(IWorkflowRepository store, IWorkflowSource _captureStore)
         {
             _store = store;
             _captureWorkflowStore = _captureStore;
