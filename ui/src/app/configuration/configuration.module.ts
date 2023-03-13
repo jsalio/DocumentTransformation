@@ -16,6 +16,7 @@ import { QueueService } from '../services/queue.service';
 import { LoaderService } from '../shared/loading-wrapper/loader.service';
 import { AppConfigService } from '../services/app-config.service';
 import { NotificationService } from '../shared/notification/notification.service';
+import { EngineRegisterComponent } from './components/engine-register/engine-register.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NotificationService } from '../shared/notification/notification.service
     WorkflowsComponent,
     RulesComponent,
     DocumentTypesComponent,
-    QueueComponent
+    QueueComponent,
+    EngineRegisterComponent
   ],
   imports: [
     CommonModule,

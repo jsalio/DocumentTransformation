@@ -1,6 +1,7 @@
 ﻿using Core.Contracts;
 using Core.Models;
 using Core.UseCase.Queue;
+using Core.UseCases.Queue;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Optional.Unsafe;

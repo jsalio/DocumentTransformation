@@ -1,0 +1,21 @@
+<h3>{{header | translate}}
+  <a *ngIf="showHelp" href="..." role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+    <cds-icon shape="info-circle" size="24"></cds-icon>
+    <span class="tooltip-content">{{ helpText |translate}}</span>
+  </a>
+</h3>
+<clr-datagrid>
+  <clr-dg-column *ngFor="let head of columns" [clrDgField]="head.field">
+    {{head.header | translate}}
+  </clr-dg-column>
+  <clr-dg-column *ngIf="includeActions">
+    {{'Actions' | translate}}
+  </clr-dg-column>
+  <clr-dg-row *clrDgItems="let row of dataSet">
+    <clr-dg-cell *ngFor="let head of columns">{{dataSet[head.field]}}</clr-dg-cell>
+    <clr-dg-cell *ngIf="includeActions">
+      <ng-content></ng-content>
+    </clr-dg-cell>
+  </clr-dg-row>
+  <clr-dg-footer>{{dataSet.length}} document(s)</clr-dg-footer>
+</clr-datagrid>

@@ -1,13 +1,12 @@
-﻿using Core.Contracts;
-using Core.Models;
-using Optional;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
+using Core.Contracts;
+using Core.Models;
+using Optional;
 
-namespace Core.UseCase.Rules
+namespace Core.UseCases.Rules
 {
     public sealed class SaveChanges
     {

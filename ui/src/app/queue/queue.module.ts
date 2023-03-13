@@ -7,6 +7,8 @@ import '@cds/core/input/register.js'
 import { ClarityModule } from "@clr/angular";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../shared/shared.module';
+import { DocumentService } from '../services/documwent.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { TranslateModule } from '@ngx-translate/core';
     ClarityModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     TranslateModule.forChild()
-  ]
+  ],
+  providers: [DocumentService]
 })
 export class QueueModule { }

@@ -20,6 +20,62 @@ namespace Boundaries.Store.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.17");
 
+            modelBuilder.Entity("Core.Models.Attempts.Attempt", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .UseIdentityColumn();
+
+                    b.Property<long>("BatchId")
+                        .HasColumnType("bigint");
+
+                    b.Property<int>("CaseCaseStatus")
+                        .HasColumnType("int");
+
+                    b.Property<long>("DocumentHandler")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("DocumentType")
+                        .HasColumnType("bigint");
+
+                    b.Property<DateTimeOffset>("LastUpDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("RegistryDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DocumentHandler");
+
+                    b.ToTable("Attempt");
+                });
+
+            modelBuilder.Entity("Core.Models.Attempts.AttemptDetail", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<long>("AttemptId")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("ErrorDetails")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTimeOffset>("RegistryDate")
+                        .HasColumnType("datetimeoffset");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AttemptId");
+
+                    b.ToTable("AttemptDetail");
+                });
+
             modelBuilder.Entity("Core.Models.Rule", b =>
                 {
                     b.Property<int>("Id")
@@ -106,6 +162,22 @@ namespace Boundaries.Store.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Workflows");
+                });
+
+            modelBuilder.Entity("Core.Models.Attempts.AttemptDetail", b =>
+                {
+                    b.HasOne("Core.Models.Attempts.Attempt", "Attempt")
+                        .WithMany("AttemptDetails")
+                        .HasForeignKey("AttemptId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Attempt");
+                });
+
+            modelBuilder.Entity("Core.Models.Attempts.Attempt", b =>
+                {
+                    b.Navigation("AttemptDetails");
                 });
 #pragma warning restore 612, 618
         }

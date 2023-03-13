@@ -1,13 +1,11 @@
-﻿using Core.Contracts;
-using Core.Models;
-using Core.Models.Exceptions;
-using Optional;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using Core.Contracts;
+using Core.Models.Exceptions;
+using Optional;
 
-namespace Core.UseCase.Queue
+namespace Core.UseCases.Queue
 {
     public sealed class SaveChanges
     {

@@ -1,0 +1,57 @@
+<h3>{{'LockedDocuments'|translate}}
+  <a href="..." role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+    <cds-icon shape="info-circle" size="24"></cds-icon>
+    <span class="tooltip-content">{{'LockDocumentDetails'|translate}}</span>
+  </a>
+</h3>
+<clr-datagrid [(clrDgSelected)]="selected">
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <button (click)="multiUnlockHandle(selected)" type="button" [disabled]="selected.length === 0"
+        class="btn btn-sm btn-secondary"><cds-icon shape="lock"></cds-icon>Unlock all selected</button>
+    </div>
+  </clr-dg-action-bar>
+  <clr-dg-column *ngFor="let head of columns" [clrDgField]="head.field">
+    {{head.header | translate}}
+  </clr-dg-column>
+  <clr-dg-column>
+    {{'Actions' | translate}}
+  </clr-dg-column>
+  <clr-dg-row *clrDgItems="let document of documentLocks" [clrDgItem]="document">
+    <clr-dg-cell *ngFor="let head of columns">{{document[head.field]}}</clr-dg-cell>
+    <clr-dg-cell>
+      <div class="btn-group btn-outline-primary btn-icon btn-sm">
+        <button class="btn">
+          <cds-icon shape="details"></cds-icon>
+          {{'Log' | translate}}
+        </button>
+        <button class="btn" (click)="unlockDocument(document)">
+          <cds-icon shape="lock"></cds-icon>
+          {{'Unlock'| translate}}
+        </button>
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+  <clr-dg-footer>
+    <clr-dg-pagination #pagination [clrDgPageSize]="10">
+      <clr-dg-page-size [clrPageSizeOptions]="[10,20,50,100]"> Document per page</clr-dg-page-size>
+      {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+      of {{pagination.totalItems}} documents
+    </clr-dg-pagination>
+  </clr-dg-footer>
+</clr-datagrid>
+
+<clr-modal [(clrModalOpen)]="basic">
+  <h3 class="modal-title">{{'UnlockDocument'|translate}}</h3>
+  <div class="modal-body">
+    <div *ngIf="currentDocument">
+      <p>{{'AreYouSureUnlockCase' | translate}} {{currentDocument.id}} {{'ForDocument'|translate}}
+        {{currentDocument.documentHandler}} ?
+      </p>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="basic = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="basic = false">Ok</button>
+  </div>
+</clr-modal>

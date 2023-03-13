@@ -26,6 +26,23 @@ namespace Boundaries.Request
             return resutl.Content;
         }
 
+        public ModelType Post<ModelType, Body>(string uri, string resource, Body body = default)
+        {
+            var requestBuilder = new Request(uri, resource);
+            requestBuilder.Method = Method.Post;
+            requestBuilder.AddResource(resource);
+            if (headers.Any())
+            {
+                requestBuilder.AddHeaders(headers);
+            }
+            if (body != null)
+            {
+                requestBuilder.AddBody(body);
+            }
+            var resutl = requestBuilder.Execute<ModelType>();
+            return resutl.Content;
+        }
+
         public T Get<T>(string uri, string resource)
         {
             Request requestBuilder = new Request(uri, resource)

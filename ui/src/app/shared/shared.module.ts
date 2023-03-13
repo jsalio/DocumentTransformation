@@ -4,7 +4,7 @@ import { HeaderComponent } from './header/header.component';
 import { MenuComponent } from './menu/menu.component';
 
 import { ClarityModule } from "@clr/angular";
-import { ClarityIcons, userIcon, vmwAppIcon, cogIcon, toolsIcon, searchIcon } from '@cds/core/icon'
+import { ClarityIcons, userIcon, vmwAppIcon, cogIcon, toolsIcon, searchIcon, refreshIcon, detailsIcon, lockIcon } from '@cds/core/icon'
 import '@cds/core/icon/register.js';
 import '@cds/core/input/register.js';
 import { LayoutComponent } from './layout/layout.component'
@@ -15,7 +15,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RadioListComponent } from './radio-list/radio-list.component';
 import { LoadingWrapperComponent } from './loading-wrapper/loading-wrapper.component';
 import { LoaderService } from './loading-wrapper/loader.service';
-ClarityIcons.addIcons(userIcon, vmwAppIcon, cogIcon, toolsIcon, searchIcon)
+import { SiteTableComponent } from './site-table/site-table.component';
+ClarityIcons.addIcons(userIcon, vmwAppIcon, cogIcon, toolsIcon, searchIcon, refreshIcon, detailsIcon, lockIcon)
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ ClarityIcons.addIcons(userIcon, vmwAppIcon, cogIcon, toolsIcon, searchIcon)
     SelectorComponent,
     RadioListComponent,
     LoadingWrapperComponent,
+    SiteTableComponent,
   ],
   imports: [
     CommonModule,
@@ -41,7 +43,8 @@ ClarityIcons.addIcons(userIcon, vmwAppIcon, cogIcon, toolsIcon, searchIcon)
     TranslateModule,
     SelectorComponent,
     RadioListComponent,
-    LoadingWrapperComponent
+    LoadingWrapperComponent,
+    SiteTableComponent
   ],
   providers: [LoaderService]
 })

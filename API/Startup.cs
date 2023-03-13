@@ -1,22 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using Boundaries.Store;
 using Core.Contracts;
 using Core.Models;
 using DocumentTransformation.Filters;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using System;
+using System.Text.Json.Serialization;
+using Boundaries.Capture;
+using Boundaries.Store.Repository;
 
 namespace DocumentTransformation
 {
@@ -54,11 +50,13 @@ namespace DocumentTransformation
             services.AddScoped<IApplicationDbContext>(provider => provider.GetService<ApplicationDbContext>());
 
 
-            services.AddScoped<IQueueSource, Boundaries.Capture.QueueSource>();
-            services.AddScoped<IServiceConfigStore, Boundaries.Store.ConfigServiceStore>();
+            services.AddScoped<IQueueSource, QueueSource>();
+            services.AddScoped<IServiceConfigStore, ConfigServiceStore>();
             services.AddScoped<IWorkflowRepository, Boundaries.Store.Repository.Workflow>();
-            services.AddScoped<IRuleRepository, Boundaries.Store.Repository.RuleRepository>();
-            services.AddScoped<IWorkflowSource, Boundaries.Capture.WorkflowSource>();
+            services.AddScoped<IRuleRepository, RuleRepository>();
+            services.AddScoped<IWorkflowSource, WorkflowSource>();
+            services.AddScoped<IDocumentSource, DocumentSource>();
+            services.AddScoped<IAttemptStore, AttemptRepository>();
 
             services.AddSwaggerGen();
             services.AddSwaggerGen(c =>

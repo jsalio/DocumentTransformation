@@ -14,6 +14,9 @@ export class MenuComponent {
     option: 'Queue',
     link: '/queue'
   }, {
+    option: 'Lock',
+    link: '/lock-items'
+  }, {
     option: 'Configuration',
     link: '/config'
   }]

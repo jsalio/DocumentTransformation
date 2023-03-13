@@ -1,5 +1,6 @@
 ﻿using Core.Contracts;
 using Core.Models;
+using Core.UseCases.Rules;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Optional.Unsafe;
@@ -33,7 +34,7 @@ namespace DocumentTransformation.Controllers
         public ActionResult SaveChanges([FromBody] ApplicationRules rules)
         {
             _rules = rules;
-            Core.UseCase.Rules.SaveChanges getRules = new Core.UseCase.Rules.SaveChanges(_store, this);
+            SaveChanges getRules = new SaveChanges(_store, this);
             var current = getRules.Execute();
             ValidateResult(current);
             return Ok();

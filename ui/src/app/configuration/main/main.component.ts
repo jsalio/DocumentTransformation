@@ -10,4 +10,5 @@ export class MainComponent {
   workfolowsActive: string | boolean = ""
   rulesActive: string | boolean = ""
   queueActive: string | boolean = ""
+  pdfEngine: string | boolean = ""
 }
