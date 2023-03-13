@@ -32,7 +32,7 @@ export class MainComponent {
     },
     {
       header: 'FailedAttempts',
-      field: 'failedAttempts'
+      field: 'attempt'
     }
   ]
 
@@ -53,13 +53,20 @@ export class MainComponent {
     this.basic = true;
   }
 
+  unlockSelectedDocument = () => {
+    this.basic = true;
+  }
+
   okHandler = () => {
     this.basic = false;
     this.currentDocument = undefined;
   }
 
-  multiUnlockHandle = (items: Array<any>) => {
-    console.log(items);
+  multiUnlockHandle = (items: Array<DocumentLock>) => {
+    var elements = items.map((item) => item.id.toString());
+    this.attemptService.unlockDocuments(elements).then((data) => {
+      console.log(data);
+    });
   }
 }
 
@@ -69,5 +76,5 @@ export interface DocumentLock {
   batchName: string;
   documentType: string;
   documentHandler: string;
-  failedAttempts: number;
+  attempt: number;
 }

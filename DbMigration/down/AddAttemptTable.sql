@@ -8,7 +8,7 @@ DROP TABLE [Pdf].[Attempt];
 GO
 
 DELETE FROM [__EFMigrationsHistory]
-WHERE [MigrationId] = N'20230312000721_AddAttemptTables';
+WHERE [MigrationId] = N'20230313145814_AddAttemptTables';
 GO
 
 COMMIT;

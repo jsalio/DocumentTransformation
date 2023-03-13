@@ -121,12 +121,23 @@ namespace Boundaries.Store.Repository
         Task<bool> IAttemptStore.Exists(Expression<Func<Attempt, bool>> expression)
             => _context.Attempt.AnyAsync(expression);
 
-        Task<List<Attempt>> IAttemptStore.GetAllCases()
+        Task<List<AttemptView>> IAttemptStore.GetAllCases()
         {
             try
             {
                 var query = _context.Attempt
+                    .Include(d => d.AttemptDetails)
                     .Where(x => x.CaseCaseStatus == AttemptCaseStatus.Lock)
+                    .Select(x => new AttemptView
+                    {
+                        Id = x.Id,
+                        BatchName = x.BatchName,
+                        Attempt = x.AttemptDetails.Count,
+                        BatchId = x.BatchId,
+                        DocumentHandler = x.DocumentHandler,
+                        DocumentType = x.DocumentType,
+                        RegistryDate = x.RegistryDate
+                    })
                     .ToListAsync();
                 return query;
             }

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Boundaries.Store.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230312000721_AddAttemptTables")]
+    [Migration("20230313145814_AddAttemptTables")]
     partial class AddAttemptTables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -31,6 +31,9 @@ namespace Boundaries.Store.Migrations
 
                     b.Property<long>("BatchId")
                         .HasColumnType("bigint");
+
+                    b.Property<string>("BatchName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CaseCaseStatus")
                         .HasColumnType("int");
@@ -70,6 +73,9 @@ namespace Boundaries.Store.Migrations
 
                     b.Property<DateTimeOffset>("RegistryDate")
                         .HasColumnType("datetimeoffset");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

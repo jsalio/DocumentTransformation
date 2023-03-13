@@ -14,6 +14,7 @@ namespace Boundaries.Store.Migrations
                 {
                     Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    BatchName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     BatchId = table.Column<long>(type: "bigint", nullable: false),
                     DocumentHandler = table.Column<long>(type: "bigint", nullable: false),
                     DocumentType = table.Column<long>(type: "bigint", nullable: false),
@@ -35,7 +36,8 @@ namespace Boundaries.Store.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AttemptId = table.Column<long>(type: "bigint", nullable: false),
                     RegistryDate = table.Column<DateTimeOffset>(type: "datetimeoffset", nullable: false),
-                    ErrorDetails = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    ErrorDetails = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

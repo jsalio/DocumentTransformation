@@ -1,1 +1,31 @@
-<p>engine-register works!</p>
+<h3>{{'Queue'|translate}}
+  <a href="..." role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+    <cds-icon shape="info-circle" size="24"></cds-icon>
+    <span class="tooltip-content">{{'ElementsInQueue'|translate}}</span>
+  </a>
+</h3>
+<clr-datagrid>
+  <clr-dg-column *ngFor="let head of cols" [clrDgField]="head.field">
+    {{head.header | translate}}
+  </clr-dg-column>
+  <clr-dg-column>
+    {{'Actions' | translate}}
+  </clr-dg-column>
+  <clr-dg-row *clrDgItems="let document of dataSet">
+    <clr-dg-cell *ngFor="let head of cols">{{document[head.field]}}</clr-dg-cell>
+    <clr-dg-cell>
+      <div class="btn-group btn-outline-primary btn-icon btn-sm">
+        <button class="btn">
+          <cds-icon shape="pencil"></cds-icon>
+          <span class="clr-icon-title">Edit</span>
+        </button>
+        <button class="btn btn-danger">
+          <cds-icon shape="close">
+            <span class="clr-icon-title">Remove</span>
+          </cds-icon>
+        </button>
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+  <!-- <clr-dg-footer>{{documentQueue.length}} document(s)</clr-dg-footer> -->
+</clr-datagrid>

@@ -17,16 +17,16 @@ namespace Core.UseCases.Attempt
             _attemptStore = attemptStore;
         }
 
-        public Option<Task<List<Models.Attempts.Attempt>>, StoreException> Execute()
+        public Option<Task<List<Models.Attempts.AttemptView>>, StoreException> Execute()
         {
             try
             {
                 var query = _attemptStore.GetAllCases();
-                return Option.Some<Task<List<Models.Attempts.Attempt>>, StoreException>(query);
+                return Option.Some<Task<List<Models.Attempts.AttemptView>>, StoreException>(query);
             }
             catch (StoreException e)
             {
-                return Option.None<Task<List<Models.Attempts.Attempt>>, StoreException>(e);
+                return Option.None<Task<List<Models.Attempts.AttemptView>>, StoreException>(e);
             }
         }
     }

@@ -40,7 +40,7 @@ namespace Core.Contracts
         /// </summary>
         /// <returns></returns>
         /// <exception cref="StoreException"></exception>
-        Task<List<Attempt>> GetAllCases();
+        Task<List<AttemptView>> GetAllCases();
         /// <summary>
         /// 
         /// </summary>
