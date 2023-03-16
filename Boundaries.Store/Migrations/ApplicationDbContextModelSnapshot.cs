@@ -82,6 +82,69 @@ namespace Boundaries.Store.Migrations
                     b.ToTable("AttemptDetail");
                 });
 
+            modelBuilder.Entity("Core.Models.EngineLicense", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<int>("EngineId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("LicenseString")
+                        .HasMaxLength(20000000)
+                        .HasColumnType("Text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EngineId")
+                        .IsUnique();
+
+                    b.ToTable("EngineLicenses");
+                });
+
+            modelBuilder.Entity("Core.Models.PdfEngine", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("EngineDescription")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EngineName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EngineStatus")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("EngineType")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EngineTypeName")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EngineVersion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDefault")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LicenseType")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("SupportOcr")
+                        .HasColumnType("bit");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EngineTypeName");
+
+                    b.ToTable("PdfEngines");
+                });
+
             modelBuilder.Entity("Core.Models.Rule", b =>
                 {
                     b.Property<int>("Id")
@@ -181,9 +244,25 @@ namespace Boundaries.Store.Migrations
                     b.Navigation("Attempt");
                 });
 
+            modelBuilder.Entity("Core.Models.EngineLicense", b =>
+                {
+                    b.HasOne("Core.Models.PdfEngine", "PdfEngine")
+                        .WithOne("EngineLicense")
+                        .HasForeignKey("Core.Models.EngineLicense", "EngineId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PdfEngine");
+                });
+
             modelBuilder.Entity("Core.Models.Attempts.Attempt", b =>
                 {
                     b.Navigation("AttemptDetails");
+                });
+
+            modelBuilder.Entity("Core.Models.PdfEngine", b =>
+                {
+                    b.Navigation("EngineLicense");
                 });
 #pragma warning restore 612, 618
         }

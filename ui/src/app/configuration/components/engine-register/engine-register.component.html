@@ -1,10 +1,18 @@
-<h3>{{'Queue'|translate}}
+<h3>{{'Engines'|translate}}
   <a href="..." role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
     <cds-icon shape="info-circle" size="24"></cds-icon>
-    <span class="tooltip-content">{{'ElementsInQueue'|translate}}</span>
+    <span class="tooltip-content">{{'EnginesAvailable'|translate}}</span>
   </a>
 </h3>
 <clr-datagrid>
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <button (click)="addNew()" type="button" class="btn btn-sm btn-secondary">
+        <cds-icon shape="plus"></cds-icon>
+        {{'NewLicense'|translate}}
+      </button>
+    </div>
+  </clr-dg-action-bar>
   <clr-dg-column *ngFor="let head of cols" [clrDgField]="head.field">
     {{head.header | translate}}
   </clr-dg-column>
@@ -15,9 +23,13 @@
     <clr-dg-cell *ngFor="let head of cols">{{document[head.field]}}</clr-dg-cell>
     <clr-dg-cell>
       <div class="btn-group btn-outline-primary btn-icon btn-sm">
-        <button class="btn">
+        <button class="btn" (click)="edit(document)">
           <cds-icon shape="pencil"></cds-icon>
           <span class="clr-icon-title">Edit</span>
+        </button>
+        <button (click)="viewLicense(document)" class="btn" *ngIf="document.licenseType === 'JsonLicense'">
+          <cds-icon shape="eye"></cds-icon>
+          <span class="clr-icon-title">ViewLicense</span>
         </button>
         <button class="btn btn-danger">
           <cds-icon shape="close">
@@ -27,5 +39,5 @@
       </div>
     </clr-dg-cell>
   </clr-dg-row>
-  <!-- <clr-dg-footer>{{documentQueue.length}} document(s)</clr-dg-footer> -->
+  <clr-dg-footer>{{dataSet.length}} license(s)</clr-dg-footer>
 </clr-datagrid>

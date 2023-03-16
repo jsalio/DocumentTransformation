@@ -57,6 +57,7 @@ namespace DocumentTransformation
             services.AddScoped<IWorkflowSource, WorkflowSource>();
             services.AddScoped<IDocumentSource, DocumentSource>();
             services.AddScoped<IAttemptStore, AttemptRepository>();
+            services.AddScoped<IServiceEngine, ServiceEngine>();
 
             services.AddSwaggerGen();
             services.AddSwaggerGen(c =>

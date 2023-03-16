@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DocumentLock } from '../lock/main/main.component';
+import { CaseDetails, DocumentLock } from '../lock/main/main.component';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -12,10 +13,15 @@ export class AttemptService {
   constructor(private http: HttpClient) { }
 
   public getActiveCasesList(): Promise<Array<DocumentLock>> {
-    return this.http.get<Array<DocumentLock>>('https://localhost:44367/api/Attempt/list').toPromise();
+    return this.http.get<Array<DocumentLock>>(`${environment.apiUrl}/Attempt/list`).toPromise();
   }
 
-  public unlockDocuments(documentIds: Array<string>): Promise<Array<number>> {
-    return this.http.put<Array<number>>(`https://localhost:44367/api/Attempt/unlock`, documentIds).toPromise();
+  public unlockDocuments(documentIds: Array<number>): Promise<Array<number>> {
+    console.log(documentIds);
+    return this.http.put<Array<number>>(`${environment.apiUrl}/Attempt/unlock`, documentIds).toPromise();
+  }
+
+  public getCaseDetails(documentId: number): Promise<Array<CaseDetails>> {
+    return this.http.get<Array<CaseDetails>>(`${environment.apiUrl}/Attempt/${documentId}/details`).toPromise();
   }
 }

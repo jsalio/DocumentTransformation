@@ -20,13 +20,13 @@ namespace Core.Models
         public EngineLicense EngineLicense { get; set; }
     }
 
-    public class CreateEngineRequest
+    public class EngineRequest
     {
         public EngineTypeName EngineTypeName { get; set; }
         public string EngineName { get; set; }
         public string EngineVersion { get; set; }
         public EngineType EngineType { get; set; }
-        public string EngineStatus { get; set; }
+        public bool EngineStatus { get; set; }
         public string EngineDescription { get; set; }
         public LicenseType LicenseType { get; set; }
         public bool IsDefault { get; set; }

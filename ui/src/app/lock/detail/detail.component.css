@@ -1,0 +1,10 @@
+.ui-text-area{
+  width: 100%;
+  height: 215px;
+  border-radius: 13px;
+  border-color: #dce9f5;
+  background-color: #f1f1f1;
+  font-size: medium;
+  font-family: ui-rounded;
+  font-weight: 500;
+}

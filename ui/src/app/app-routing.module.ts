@@ -20,6 +20,10 @@ const routes: Routes = [
       {
         path: 'lock-items',
         loadChildren: () => import('./lock/lock.module').then(m => m.LockModule)
+      },
+      {
+        path: 'document-types',
+        loadChildren: () => import('./document-types/document-types.module').then(m => m.DocumentTypesModule)
       }
     ]
   }

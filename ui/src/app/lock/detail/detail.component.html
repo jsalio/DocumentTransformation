@@ -1,0 +1,35 @@
+<button (click)="goBack()"><cds-icon shape="close"></cds-icon></button>
+<h3>{{'DetailsForCase'|translate}} {{caseId}}
+  <a href="..." role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+    <cds-icon shape="info-circle" size="24"></cds-icon>
+    <span class="tooltip-content">{{'LockDocumentDetails'|translate}}</span>
+  </a>
+</h3>
+<clr-accordion>
+  <clr-accordion-panel *ngFor="let details of caseDetails">
+    <clr-accordion-title style="width:100%">
+      <div class="clr-row">
+        <div class="clr-col-4">
+          <span>{{details.attemptId}}</span>
+        </div>
+        <div class="clr-col-6">
+          <span>{{details.registryDate}}</span>
+        </div>
+        <div class="clr-col-2">
+          <span class="clr-offset-xl-10 " [ngClass]="'badge '+getBadgeClass(details)">
+            <span class="clr-sr-only">
+            </span>
+          </span>
+        </div>
+      </div>
+    </clr-accordion-title>
+    <clr-accordion-content *clrIfExpanded>
+      <section>
+        <label>
+          <h2>{{'Detail'|translate}}</h2>
+        </label>
+        <textarea class="ui-text-area" disabled [value]="details.errorDetails"></textarea>
+      </section>
+    </clr-accordion-content>
+  </clr-accordion-panel>
+</clr-accordion>

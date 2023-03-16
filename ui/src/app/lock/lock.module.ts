@@ -5,12 +5,14 @@ import { LockRoutingModule } from './lock-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { ClarityModule } from '@clr/angular';
 import { AttemptService } from '../services/attempt.service';
+import { DetailComponent } from './detail/detail.component';
 
 
 
 @NgModule({
   declarations: [
-    MainComponent
+    MainComponent,
+    DetailComponent
   ],
   imports: [
     CommonModule,

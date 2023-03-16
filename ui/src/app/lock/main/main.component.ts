@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AttemptService } from 'src/app/services/attempt.service';
 
 @Component({
@@ -41,9 +42,12 @@ export class MainComponent {
   /**
    *
    */
-  constructor(private attemptService: AttemptService) {
+  constructor(private attemptService: AttemptService, private router: Router) {
+    this.loadDataSet();
+  }
+
+  loadDataSet = () => {
     this.attemptService.getActiveCasesList().then((data) => {
-      console.log(data);
       this.documentLocks = data;
     });
   }
@@ -58,14 +62,22 @@ export class MainComponent {
   }
 
   okHandler = () => {
-    this.basic = false;
-    this.currentDocument = undefined;
+
+    this.attemptService.unlockDocuments([this.currentDocument?.id]).then((data) => {
+      this.loadDataSet()
+      this.basic = false;
+      this.currentDocument = undefined;
+    });
+  }
+
+  goToDetails = (row: DocumentLock) => {
+    this.router.navigate(['lock-items/lock', row.id]);
   }
 
   multiUnlockHandle = (items: Array<DocumentLock>) => {
-    var elements = items.map((item) => item.id.toString());
+    var elements = items.map((item) => item.id);
     this.attemptService.unlockDocuments(elements).then((data) => {
-      console.log(data);
+      this.loadDataSet()
     });
   }
 }
@@ -77,4 +89,18 @@ export interface DocumentLock {
   documentType: string;
   documentHandler: string;
   attempt: number;
+}
+
+export interface CaseDetails {
+  id: number;
+  attemptId: number;
+  registryDate: Date;
+  errorDetails: string;
+  status: CaseStatus
+}
+
+export enum CaseStatus {
+  Inactive = 'Inactive',
+  Active = 'Active',
+  Closed = 'Closed'
 }

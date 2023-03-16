@@ -15,6 +15,8 @@ namespace Boundaries.Store
         DbSet<ServiceSettings> ServiceSettings{ get; set; }
         DbSet<Attempt> Attempt { get; set; }
         DbSet<AttemptDetail> AttemptDetail { get; set; }
+        DbSet<PdfEngine> PdfEngines { get; set; }
+        DbSet<EngineLicense> EngineLicenses { get; set; }
         Task<int> SaveChanges();
     }
 }

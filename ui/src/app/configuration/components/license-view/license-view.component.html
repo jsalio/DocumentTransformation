@@ -1,0 +1,100 @@
+<h3>{{'RegistryLicenses'|translate}}
+  <a href="..." role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+    <cds-icon shape="info-circle" size="24"></cds-icon>
+    <span class="tooltip-content">{{'LicenseExplains'|translate}}</span>
+  </a>
+</h3>
+
+<clr-datagrid>
+  <clr-dg-action-bar>
+    <div class="btn-group">
+      <button (click)="addNew()" type="button" class="btn btn-sm btn-secondary">
+        <cds-icon shape="plus"></cds-icon>
+        {{'NewLicenseKey'|translate}}
+      </button>
+    </div>
+  </clr-dg-action-bar>
+  <clr-dg-column *ngFor="let head of cols" [clrDgField]="head.field">
+    {{head.header | translate}}
+  </clr-dg-column>
+  <clr-dg-column>
+    {{'Actions' | translate}}
+  </clr-dg-column>
+  <clr-dg-row *clrDgItems="let document of jsonLicense">
+    <clr-dg-cell *ngFor="let head of cols">{{document[head.field]}}</clr-dg-cell>
+    <clr-dg-cell>
+      <div class="btn-group btn-outline-primary btn-icon btn-sm">
+        <button class="btn" (click)="edit(document)">
+          <cds-icon shape="pencil"></cds-icon>
+          <span class="clr-icon-title">{{'Edit' | translate}}</span>
+        </button>
+        <button class="btn btn-danger" (click)="removeKey(document)">
+          <cds-icon shape="close">
+            <span class="clr-icon-title">{{'Remove'| translate }}</span>
+          </cds-icon>
+        </button>
+      </div>
+    </clr-dg-cell>
+  </clr-dg-row>
+  <clr-dg-footer>{{jsonLicense.length}} {{'license' | translate}}</clr-dg-footer>
+</clr-datagrid>
+<button class="btn btn-sm btn-secondary" (click)="saveLicenseChange()">
+  <cds-icon shape="floppy"></cds-icon>
+  {{'SaveChange'| translate}}
+</button>
+<clr-modal [(clrModalOpen)]="basic">
+  <h3 class="modal-title">{{'AddLicenseKey'|translate}}</h3>
+  <div class="modal-body">
+    <div class="clr-form">
+
+      <div class="clr-form-control">
+        <label for="example" class="clr-control-label">{{'LicenseKey'| translate}}</label>
+        <div class="clr-control-container">
+          <div class="clr-input-wrapper">
+            <input type="text" id="example" placeholder="Example Input" [(ngModel)]="currentRow.key"
+              class="clr-input" />
+            <cds-icon class="clr-validate-icon" shape="exclamation-circle"></cds-icon>
+          </div>
+        </div>
+      </div>
+
+      <div class="clr-form-control">
+        <label for="example" class="clr-control-label">{{'Value'| translate}}</label>
+        <div class="clr-control-container">
+          <div class="clr-input-wrapper">
+            <textarea [(ngModel)]="currentRow.value" name="" id="" cols="30" rows="10"></textarea>
+            <cds-icon class="clr-validate-icon" shape="exclamation-circle"></cds-icon>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="basic = false">
+      {{'Cancel'| translate}}
+    </button>
+    <button type="button" class="btn btn-primary" (click)="isEdit ? saveEditKey() : saveNewKey()">
+      {{'Ok'| translate}}
+    </button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="removeDialog">
+  <h3 class="modal-title">{{'RemoveKey'|translate}}</h3>
+  <div class="modal-body">
+    <div class="clr-form">
+      <div class="clr-form-control">
+        <label for="example" class="clr-control-label">{{'AreYouSureRemoveLicense'|translate}}</label>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="removeDialog = false">
+      {{'Cancel'| translate}}
+    </button>
+    <button type="button" class="btn btn-primary" (click)="remove()">
+      {{'Ok'| translate}}
+    </button>
+  </div>
+</clr-modal>

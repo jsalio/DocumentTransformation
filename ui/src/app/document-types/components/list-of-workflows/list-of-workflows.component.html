@@ -1,0 +1,71 @@
+<h3>{{'DocumentTypesPerWorkflows'|translate}}
+
+  <a href="..." role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+    <cds-icon shape="info-circle" size="24"></cds-icon>
+    <span class="tooltip-content">{{'DocumentTypesPerWorkflowsDetails'|translate}}</span>
+  </a>
+</h3>
+<div class="btn-group">
+</div>
+<clr-accordion>
+  <clr-accordion-panel *ngFor="let details of workflowTypes">
+    <clr-accordion-title style="width:100%">
+      <div class="clr-row">
+        <div class="clr-col-4">
+          <span>{{details.workflowId}}</span>
+        </div>
+        <div class="clr-col-6">
+          <span>{{details.workflowName}}</span>
+        </div>
+        <div class="clr-col-2">
+          <span class="clr-offset-xl-10 ">
+            <span class="clr-sr-only">
+            </span>
+          </span>
+        </div>
+      </div>
+    </clr-accordion-title>
+    <clr-accordion-content *clrIfExpanded>
+      <section>
+        <label>
+          <h2>{{'DocumentToConvert'|translate}}</h2>
+        </label>
+        <table class="table">
+          <thead>
+              <tr>
+                  <th>{{'DocumentTypeId'| translate}}</th>
+                  <th>{{'DocumentTypeName'| translate}}</th>
+                  <th>{{'ConvertibleToPDF'| translate}}</th>
+                  <th>{{'GenerateOcrFile'| translate}}</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let document of details.documentTypes" >
+                  <td>{{document.documentTypeId}}</td>
+                  <td>{{document.documentTypeName}}</td>
+                  <td>
+                    <input type="checkbox" (change)="onRowSelect($event,document,'PDF')" [checked]="document.PDF">
+                  </td>
+                  <td>
+                    <input type="checkbox" (change)="onRowSelect($event,document,'OCR')" [checked]="document.OCR">
+                  </td>
+              </tr>
+          </tbody>
+          <tfoot>
+              <tr>
+                  <td colspan="4">
+                    <div class="btn-group">
+                      <button  class="btn btn-sm btn-secondary" [disabled]="!dataSetChange">
+                        <cds-icon *ngIf="!dataSetChange" shape="floppy"></cds-icon>
+                        <cds-icon  *ngIf="dataSetChange" shape="floppy" badge="info"></cds-icon>
+                        {{'SaveChanges'| translate}}
+                      </button>
+                    </div>
+                  </td>
+              </tr>
+          </tfoot>
+      </table>
+      </section>
+    </clr-accordion-content>
+  </clr-accordion-panel>
+</clr-accordion>

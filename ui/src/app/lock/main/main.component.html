@@ -21,7 +21,7 @@
     <clr-dg-cell *ngFor="let head of columns">{{document[head.field]}}</clr-dg-cell>
     <clr-dg-cell>
       <div class="btn-group btn-outline-primary btn-icon btn-sm">
-        <button class="btn">
+        <button class="btn" (click)="goToDetails(document)">
           <cds-icon shape="details"></cds-icon>
           {{'Log' | translate}}
         </button>
@@ -52,6 +52,6 @@
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline" (click)="basic = false">Cancel</button>
-    <button type="button" class="btn btn-primary" (click)="basic = false">Ok</button>
+    <button type="button" class="btn btn-primary" (click)="okHandler()">Ok</button>
   </div>
 </clr-modal>

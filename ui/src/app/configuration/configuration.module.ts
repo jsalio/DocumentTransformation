@@ -17,6 +17,9 @@ import { LoaderService } from '../shared/loading-wrapper/loader.service';
 import { AppConfigService } from '../services/app-config.service';
 import { NotificationService } from '../shared/notification/notification.service';
 import { EngineRegisterComponent } from './components/engine-register/engine-register.component';
+import EngineService from '../services/engine.service';
+import { EngineFormComponent } from './components/engine-form/engine-form.component';
+import { LicenseViewComponent } from './components/license-view/license-view.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +29,9 @@ import { EngineRegisterComponent } from './components/engine-register/engine-reg
     RulesComponent,
     DocumentTypesComponent,
     QueueComponent,
-    EngineRegisterComponent
+    EngineRegisterComponent,
+    EngineFormComponent,
+    LicenseViewComponent
   ],
   imports: [
     CommonModule,
@@ -37,6 +42,6 @@ import { EngineRegisterComponent } from './components/engine-register/engine-reg
     TranslateModule.forChild(),
     SharedModule
   ],
-  providers: [QueueService, LoaderService, AppConfigService, NotificationService]
+  providers: [QueueService, LoaderService, AppConfigService, NotificationService, EngineService]
 })
 export class ConfigurationModule { }

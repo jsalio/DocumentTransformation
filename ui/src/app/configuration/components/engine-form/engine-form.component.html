@@ -1,0 +1,73 @@
+<h3>{{'RegisterPDFEngine'|translate}}
+  <a href="..." role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+    <cds-icon shape="info-circle" size="24"></cds-icon>
+    <span class="tooltip-content">{{'RegisterPDFEngineExplains'|translate}}</span>
+  </a>
+</h3>
+<form clrForm [formGroup]="form" (ngSubmit)="saveChanges()">
+  <span class="clr-sr-only">Tabbing through form inputs will trigger validation messages to be read aloud.</span>
+  <clr-control-container>
+    <label class="clr-control-label">{{'EngineName'|translate}}</label>
+    <select class="clr-select" name="options" formControlName="engineTypeName">
+      <option value="">ChooseOne</option>
+      <option value="Aspose">Aspose</option>
+      <option value="Teseract">Teseract</option>
+      <option value="Abby">Abby</option>
+      <option value="Iris">Iris</option>
+    </select>
+  </clr-control-container>
+  <clr-input-container>
+    <label>{{'EngineName'|translate}}</label>
+    <input clrInput type="text" formControlName="engineName" required />
+    <clr-control-error>We need your first name for legal compliance</clr-control-error>
+  </clr-input-container>
+
+  <clr-input-container>
+    <label>{{'EngineVersion'|translate}}</label>
+    <input clrInput type="text" formControlName="engineVersion" required />
+    <clr-control-error>We need your first name for legal compliance</clr-control-error>
+  </clr-input-container>
+
+  <clr-control-container>
+    <label class="clr-control-label">{{'EngineType'|translate}}</label>
+    <select formControlName="engineType">
+      <option value="">{{'ChooseOne' | translate}}</option>
+      <option value="PDF">PDF</option>
+      <option value="OCR">OCR</option>
+    </select>
+  </clr-control-container>
+
+  <clr-control-container>
+    <label class="clr-control-label">{{'LicenseType'|translate}}</label>
+    <select formControlName="licenseType">
+      <option value="">{{'ChooseOne'|translate}}</option>
+      <option value="Internal">{{'Internal'| translate}}</option>
+      <option value="JsonLicense">{{'JsonLicense'|translate}}</option>
+    </select>
+  </clr-control-container>
+
+  <clr-checkbox-container>
+    <clr-checkbox-wrapper>
+      <input type="checkbox" clrCheckbox formControlName="engineStatus" />
+      <label>{{'engineStatus'|translate}}</label>
+    </clr-checkbox-wrapper>
+  </clr-checkbox-container>
+
+
+  <clr-checkbox-container>
+    <clr-checkbox-wrapper>
+      <input type="checkbox" clrCheckbox formControlName="isDefault" />
+      <label>{{'IsDefaultEngine'|translate}}</label>
+    </clr-checkbox-wrapper>
+  </clr-checkbox-container>
+
+  <clr-checkbox-container>
+    <clr-checkbox-wrapper>
+      <input type="checkbox" clrCheckbox formControlName="supportOcr" />
+      <label>{{'SupportOcr'|translate}}</label>
+    </clr-checkbox-wrapper>
+  </clr-checkbox-container>
+
+  <button type="submit" class="btn btn-primary" [disabled]="!form.valid">{{'Save'|translate}}</button>
+  <button type="button" class="btn btn-outline" (click)="goBack()">{{'Cancel'|translate}}</button>
+</form>

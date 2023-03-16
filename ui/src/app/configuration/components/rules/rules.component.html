@@ -30,7 +30,7 @@
         [ngStyle]="{'display': enableBlockElements ? '':'none','visibility': enableBlockElements ? 'visible':'hidden' }">
         <div class="clr-col-4">
             <clr-input-container>
-                <label>{{'LimitOfTry'}}</label>
+                <label>{{'LimitOfTry'|translate}}</label>
                 <input clrInput type="number" min="2" max="50" [placeholder]="translate('LimitsOfTry')"
                     formControlName="tryLimits" />
             </clr-input-container>

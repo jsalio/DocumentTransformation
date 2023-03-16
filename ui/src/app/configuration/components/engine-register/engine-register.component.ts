@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import EngineService from 'src/app/services/engine.service';
 
 @Component({
   selector: 'app-engine-register',
@@ -9,15 +11,15 @@ export class EngineRegisterComponent {
 
   cols = [
     {
-      header: 'Engine Name',
+      header: 'EngineName',
       field: 'engineName'
     },
     {
-      header: 'Engine Version',
+      header: 'EngineVersion',
       field: 'engineVersion'
     },
     {
-      header: 'Engine Type',
+      header: 'EngineType',
       field: 'engineType'
     },
     {
@@ -25,84 +27,76 @@ export class EngineRegisterComponent {
       field: 'engineStatus'
     },
     {
-      header: 'License Type',
+      header: 'LicenseType',
       field: 'licenseType'
     },
     {
       header: 'Default',
-      field: 'default'
+      field: 'isDefault'
     },
     {
-      header: 'Support OCR',
-      field: 'supportOCR'
+      header: 'SupportOcr',
+      field: 'supportOcr'
     }
   ]
 
-  dataSet: Array<PDFEngine> = [
-    {
-      engineNameType: 'Aspose',
-      engineName: 'Aspose',
-      engineVersion: '1.0.0',
-      engineType: 'PDF',
-      engineStatus: 'Active',
-      engineDescription: 'Aspose PDF Engine',
-      licenseType: 'Internal',
-      default: true,
-      supportOCR: false,
-    },
-    {
-      engineNameType: 'Teseract',
-      engineName: 'Teseract',
-      engineVersion: '1.0.0',
-      engineType: 'OCR',
-      engineStatus: 'Active',
-      engineDescription: 'Teseract OCR Engine',
-      licenseType: 'Internal',
-      default: false,
-      supportOCR: true,
-    },
-    {
-      engineNameType: 'Abby',
-      engineName: 'Abby',
-      engineVersion: '1.0.0',
-      engineType: 'OCR',
-      engineStatus: 'Active',
-      engineDescription: 'Abby OCR Engine',
-      licenseType: 'Internal',
-      default: false,
-      supportOCR: true,
-    },
-    {
-      engineNameType: 'Iris',
-      engineName: 'Iris',
-      engineVersion: '1.0.0',
-      engineType: 'OCR',
-      engineStatus: 'Active',
-      engineDescription: 'Iris OCR Engine',
-      licenseType: 'JsonLicense',
-      default: false,
-      supportOCR: true,
-    }
-  ]
+  dataSet: Array<PDFEngine> = []
 
   /**
    *
    */
-  constructor() {
-    console.log(JSON.stringify(this.dataSet));
+  constructor(private engineService: EngineService, private router: Router) {
+    engineService.getEngineList().then((data) => {
+      this.dataSet = data;
 
+    });
+  }
+
+  edit = (row: PDFEngine) => {
+    this.router.navigate(['config/engine', row.id]);
+  }
+
+  viewLicense = (row: PDFEngine) => {
+    this.router.navigate(['config/engine/license', row.id]);
+  }
+
+  addNew = () => {
+    this.router.navigate(['config/engine', 0]);
   }
 }
 
 
 export interface PDFEngine {
-  engineNameType: 'Aspose' | 'Teseract' | 'Abby' | 'Iris';
+  id: number;
+  engineNameType: EngineNameType;
   engineName: string;
   engineVersion: string;
-  engineType: 'PDF' | 'OCR';
+  engineType: EngineType;
   engineStatus: string;
   engineDescription: string;
   licenseType: 'Internal' | 'JsonLicense';
-  default: boolean;
-  supportOCR: boolean;
+  isDefault: boolean;
+  supportOcr: boolean;
+}
+
+export enum EngineNameType {
+  Aspose = 'Aspose',
+  Teseract = 'Teseract',
+  Abby = 'Abby',
+  Iris = 'Iris'
+}
+
+export enum EngineType {
+  PDF = 'PDF',
+  OCR = 'OCR'
+}
+
+export enum LicenseType {
+  Internal = 'Internal',
+  JsonLicense = 'JsonLicense'
+}
+
+export interface EngineLicense {
+  engineId: number
+  licenseString: string
 }
