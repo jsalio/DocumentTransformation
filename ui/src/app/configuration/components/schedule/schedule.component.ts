@@ -6,10 +6,11 @@ import { TimerOption } from "src/app/shared/models/TimerOption";
 import { Option } from 'src/app/shared/selector/selector.component';
 import { EnumToList } from 'src/app/shared/utils/enumToList';
 import { LoaderService } from 'src/app/shared/loading-wrapper/loader.service';
-import { AppConfigService, AppSetting } from 'src/app/services/app-config.service';
+import { AppConfigService } from 'src/app/services/app-config.service';
 import { NotificationService, ToastType } from 'src/app/shared/notification/notification.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { buildErrorResponse } from 'src/app/shared/models/error-handler';
+import { AppSetting } from 'src/app/shared/models/AppSetting';
 
 @Component({
   selector: 'app-schedule',

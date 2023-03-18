@@ -13,6 +13,7 @@ using System;
 using System.Text.Json.Serialization;
 using Boundaries.Capture;
 using Boundaries.Store.Repository;
+using DocumentTransformation.Hubs;
 
 namespace DocumentTransformation
 {
@@ -33,6 +34,18 @@ namespace DocumentTransformation
                 options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
             });
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy", x =>
+                {
+                    x.AllowAnyHeader()
+                        .AllowAnyMethod()
+                        .SetIsOriginAllowed(origin => true)
+                        .AllowCredentials()
+                        .Build();
+                });
+            });
+            services.AddSignalR();
 
             var config = new ConfigurationBuilder()
                 .SetBasePath(AppDomain.CurrentDomain.BaseDirectory)
@@ -93,14 +106,17 @@ namespace DocumentTransformation
 
             app.UseAuthorization();
 
-            app.UseCors(x => x.AllowAnyMethod().AllowAnyHeader().SetIsOriginAllowed(origin => true));
+            app.UseCors("CorsPolicy");
 
             app.UseMiddleware<ErrorHandlerMiddlerware>();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chathub");
+                endpoints.MapHub<LogHub>("/loghub");
             });
+
         }
     }
 }

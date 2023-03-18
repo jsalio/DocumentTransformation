@@ -15,6 +15,7 @@ import { BlockUIModule } from 'ng-block-ui';
 import { LoaderService } from './shared/loading-wrapper/loader.service';
 import { NotificationService } from './shared/notification/notification.service';
 import { ToastrModule } from 'ngx-toastr';
+import LogHubService from './services/log.hub.service';
 
 
 
@@ -44,7 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [LoaderService, NotificationService],
+  providers: [LoaderService, NotificationService, LogHubService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

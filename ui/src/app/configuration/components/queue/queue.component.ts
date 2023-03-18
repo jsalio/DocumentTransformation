@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, FormControl } from '@angular/forms';
-import { QueueConfiguration, QueueService } from 'src/app/services/queue.service';
+import { QueueService } from 'src/app/services/queue.service';
+import { QueueConfiguration } from "src/app/shared/models/QueueConfiguration";
 import { LoaderService } from 'src/app/shared/loading-wrapper/loader.service';
 import { NotificationService, ToastType } from 'src/app/shared/notification/notification.service';
 

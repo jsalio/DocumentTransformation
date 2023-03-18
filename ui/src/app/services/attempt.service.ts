@@ -1,27 +1,27 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { CaseDetails, DocumentLock } from '../lock/main/main.component';
-import { environment } from 'src/environments/environment';
+import BaseApiService from './base.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AttemptService {
+export class AttemptService extends BaseApiService {
 
-  section = 'attempt'
-
-  constructor(private http: HttpClient) { }
+  constructor(private client: HttpClient) {
+    super(client,'attempt');
+  }
 
   public getActiveCasesList(): Promise<Array<DocumentLock>> {
-    return this.http.get<Array<DocumentLock>>(`${environment.apiUrl}/Attempt/list`).toPromise();
+    return this.http.get<Array<DocumentLock>>(`${this.controllerUri}/list`).toPromise();
   }
 
   public unlockDocuments(documentIds: Array<number>): Promise<Array<number>> {
     console.log(documentIds);
-    return this.http.put<Array<number>>(`${environment.apiUrl}/Attempt/unlock`, documentIds).toPromise();
+    return this.http.put<Array<number>>(`${this.controllerUri}/unlock`, documentIds).toPromise();
   }
 
   public getCaseDetails(documentId: number): Promise<Array<CaseDetails>> {
-    return this.http.get<Array<CaseDetails>>(`${environment.apiUrl}/Attempt/${documentId}/details`).toPromise();
+    return this.http.get<Array<CaseDetails>>(`${this.controllerUri}/${documentId}/details`).toPromise();
   }
 }

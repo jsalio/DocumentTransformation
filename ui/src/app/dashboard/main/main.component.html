@@ -1,1 +1,47 @@
-<p>main works!</p>
+<!-- <p>main works!</p> -->
+<!-- <table class="table">
+  <thead>
+      <tr>
+          <th>{{'Agent'| translate}}</th>
+          <th>{{ 'Date'| translate}}</th>
+          <th>{{'Message'| translate}}</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr *ngFor="let log of loggerDataSet" >
+          <td>{{log.agentId}}</td>
+          <td>{{log.message}}</td>
+          <td>
+            {{log.date}}
+          </td>
+      </tr>
+  </tbody>
+</table> -->
+<h3>{{'LiveLogger'|translate}}
+  <a href="..." role="tooltip" aria-haspopup="true" class="tooltip tooltip-lg">
+    <cds-icon shape="info-circle" size="24"></cds-icon>
+    <span class="tooltip-content">{{'LiveLogger'|translate}}</span>
+  </a>
+</h3>
+<div>
+  <clr-datagrid>
+    <clr-dg-action-bar>
+      <div class="btn-group">
+        <button (click)="clean()" type="button" class="btn btn-sm btn-secondary"><cds-icon shape="lock"></cds-icon>{{'Clean'| translate}}</button>
+      </div>
+    </clr-dg-action-bar>
+    <clr-dg-column *ngFor="let head of columns" [clrDgField]="head.field">
+      {{head.header | translate}}
+    </clr-dg-column>
+    <clr-dg-row *clrDgItems="let document of loggerDataSet">
+      <clr-dg-cell *ngFor="let head of columns">{{document[head.field]}}</clr-dg-cell>
+    </clr-dg-row>
+    <clr-dg-footer>
+      <clr-dg-pagination #pagination [clrDgPageSize]="15">
+        <clr-dg-page-size [clrPageSizeOptions]="[15,30,60,90]"> Document per page</clr-dg-page-size>
+        {{pagination.firstItem + 1}} - {{pagination.lastItem + 1}}
+        of {{pagination.totalItems}} documents
+      </clr-dg-pagination>
+    </clr-dg-footer>
+  </clr-datagrid>
+</div>
