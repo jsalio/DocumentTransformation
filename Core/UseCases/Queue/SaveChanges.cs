@@ -7,17 +7,29 @@ using Optional;
 
 namespace Core.UseCases.Queue
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class SaveChanges
     {
         private readonly IQueueSource _store;
         private readonly IRequest<Models.Queue> _request;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="request"></param>
         public SaveChanges(IQueueSource source, IRequest<Models.Queue> request)
         {
             _store = source;
             _request = request;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<ValidationResult> Validations()
         {
             Models.Queue request = _request.BuildRequest();
@@ -27,6 +39,10 @@ namespace Core.UseCases.Queue
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Option<string, CoreException> Execute()
         {
             var request = _request.BuildRequest();

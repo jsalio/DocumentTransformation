@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { PDFEngine } from '../../../configuration/components/engine-register/engine-register.component';
+import { WorkflowDocumentSettings, WorkflowService, DocumentType } from 'src/app/services/workflow.service';
+import { NotificationService, ToastType } from 'src/app/shared/notification/notification.service';
 
 @Component({
   selector: 'app-list-of-workflows',
@@ -28,127 +29,49 @@ export class ListOfWorkflowsComponent {
       field: 'OCR'
     }
   ];
-  workflowTypes:Array<WorkflowDocumentSettings> = [
-    {
-      workflowName: 'Workflow Name',
-      workflowId: 'Workflow Id',
-      workflowActive: false,
-      documentTypes: [
-        {
-          documentTypeId: 0,
-          documentTypeName: 'Document Type Name',
-          PDF: true,
-          OCR: true,
-        },
-        {
-          documentTypeId: 1,
-          documentTypeName: 'Document Type Name 2',
-          PDF: true,
-          OCR: true,
-        },
-        {
-          documentTypeId: 2,
-          documentTypeName: 'Document Type Name 3',
-          PDF: true,
-          OCR: true,
-        },
-        {
-          documentTypeId: 3,
-          documentTypeName: 'Document Type Name 4',
-          PDF: true,
-          OCR: true,
-        },
-        {
-          documentTypeId: 4,
-          documentTypeName: 'Document Type Name 5',
-          PDF: true,
-          OCR: true,
-        }
-      ]
-    },
-    {
-      workflowName: 'Workflow Name 2',
-      workflowId: 'Workflow Id 2',
-      workflowActive: false,
-      documentTypes: [
-        {
-          documentTypeId: 0,
-          documentTypeName: 'Document Type Name',
-          PDF: true,
-          OCR: true,
-        },
-        {
-          documentTypeId: 1,
-          documentTypeName: 'Document Type Name 2',
-          PDF: true,
-          OCR: true,
-        },
-        {
-          documentTypeId: 2,
-          documentTypeName: 'Document Type Name 3',
-          PDF: true,
-          OCR: true,
-        },
-        {
-          documentTypeId: 3,
-          documentTypeName: 'Document Type Name 4',
-          PDF: true,
-          OCR: true,
-        },
-        {
-          documentTypeId: 4,
-          documentTypeName: 'Document Type Name 5',
-          PDF: true,
-          OCR: true,
-        }
-      ]
-    }
-  ];
-  constructor(private router: Router) {
+  workflowTypes:Array<WorkflowDocumentSettings> = [];
+
+  constructor(private router: Router , private workflowService:WorkflowService, private notify: NotificationService) {
+    this.workflowService.getDocumentTypes().then(data => {
+      this.workflowTypes = data;
+    });
   }
 
   onRowSelect(event, row: DocumentType, col: string) {
-    debugger
     this.workflowTypes.forEach(workflow => {
-      workflow.documentTypes.forEach(documentType => {
+      workflow.documentConvertSettings.forEach(documentType => {
         if (documentType.documentTypeId === row.documentTypeId) {
           if (col === 'PDF') {
             if (event.target.checked){
-              documentType.PDF = event.target.checked;
+              documentType.convertPdf = event.target.checked;
             } else {
-              documentType.PDF = event.target.checked;
-              documentType.OCR = event.target.checked;
+              documentType.convertPdf = event.target.checked;
+              documentType.supportOcr = event.target.checked;
             }
           } else if (col === 'OCR') {
             if (event.target.checked){
-              documentType.OCR = event.target.checked;
-              documentType.PDF = event.target.checked;
+              documentType.supportOcr = event.target.checked;
+              documentType.convertPdf = event.target.checked;
             } else {
-              documentType.OCR = event.target.checked;
+              documentType.supportOcr = event.target.checked;
             }
           }
+          documentType.touched = true;
         }
       });
     });
     this.dataSetChange = true;
-    console.log(this.workflowTypes);
+  }
+
+  saveUpdateSettings = (workflowId:number) =>{
+    var changes = this.workflowTypes.find(x => x.workflowId === workflowId).documentConvertSettings.filter(x => x.touched === true)
+    this.workflowService.updateSettings(changes,workflowId).then(data => {
+      this.dataSetChange = false;
+      this.notify.show({title:'Information', message:'Settings updated successfully'}, ToastType.Success);
+    });
   }
 
 
 
   saveChanges = () => {}
-}
-
-export interface DocumentType {
-  documentTypeId: number;
-  documentTypeName: string;
-  PDF: boolean;
-  OCR: boolean;
-}
-
-export interface WorkflowDocumentSettings {
-  workflowName: string;
-  workflowId: string;
-  workflowActive: boolean;
-  documentTypes: DocumentType[];
 }

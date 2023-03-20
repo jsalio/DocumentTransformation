@@ -33,6 +33,7 @@ namespace DocumentTransformation
             {
                 options.JsonSerializerOptions.PropertyNameCaseInsensitive = true;
                 options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
+                options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
             });
             services.AddCors(options =>
             {
@@ -65,7 +66,7 @@ namespace DocumentTransformation
 
             services.AddScoped<IQueueSource, QueueSource>();
             services.AddScoped<IServiceConfigStore, ConfigServiceStore>();
-            services.AddScoped<IWorkflowRepository, Boundaries.Store.Repository.Workflow>();
+            services.AddScoped<IWorkflowRepository, Boundaries.Store.Repository.WorkflowStore>();
             services.AddScoped<IRuleRepository, RuleRepository>();
             services.AddScoped<IWorkflowSource, WorkflowSource>();
             services.AddScoped<IDocumentSource, DocumentSource>();

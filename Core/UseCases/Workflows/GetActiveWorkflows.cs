@@ -5,17 +5,28 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Core.UseCase.Workflows
+namespace Core.UseCases.Workflows
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class GetActiveWorkflows
     {
         private readonly IWorkflowRepository _store;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="store"></param>
         public GetActiveWorkflows(IWorkflowRepository store)
         {
             _store = store;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Option<IEnumerable<Workflow>, Exception> Execute()
         {
             try

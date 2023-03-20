@@ -35,21 +35,6 @@ namespace Core.UseCases.Engine
                 yield return new ValidationResult("Invalid request");
             }
 
-            //if (System.Enum.IsDefined(typeof(EngineType), request.EngineType))
-            //{
-            //    yield return new ValidationResult("Invalid request");
-            //}
-
-            //if (System.Enum.IsDefined(typeof(EngineTypeName), request.EngineTypeName))
-            //{
-            //    yield return new ValidationResult("Invalid request");
-            //}
-
-            //if (System.Enum.IsDefined(typeof(LicenseType), request.LicenseType))
-            //{
-            //    yield return new ValidationResult("Invalid request");
-            //}
-
             if (string.IsNullOrWhiteSpace(request.EngineName))
             {
                 yield return new ValidationResult("Invalid request");

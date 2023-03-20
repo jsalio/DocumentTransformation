@@ -1,6 +1,6 @@
 ﻿using Core.Contracts;
 using Core.Models;
-using Core.UseCase.ServiceSetting;
+using Core.UseCases.ServiceSetting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Optional.Unsafe;

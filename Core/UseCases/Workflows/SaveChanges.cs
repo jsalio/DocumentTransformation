@@ -1,23 +1,35 @@
-﻿using Core.Contracts;
-using Core.Models;
-using Optional;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using Core.Contracts;
+using Core.Models;
+using Optional;
 
-namespace Core.UseCase.Workflows
+namespace Core.UseCases.Workflows
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class SaveChanges
     {
         private readonly IWorkflowRepository _store;
         private readonly IRequest<IEnumerable<Workflow>> _request;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="store"></param>
+        /// <param name="request"></param>
         public SaveChanges(IWorkflowRepository store, IRequest<IEnumerable<Workflow>> request)
         {
             _store = store;
             _request = request;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<ValidationResult> Validate()
         {
             var request = _request.BuildRequest();
@@ -27,6 +39,10 @@ namespace Core.UseCase.Workflows
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Option<string, Exception> Execute()
         {
             var request = _request.BuildRequest();

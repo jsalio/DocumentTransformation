@@ -8,17 +8,29 @@ using Optional;
 
 namespace Core.UseCases.Rules
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class SaveChanges
     {
         private readonly IRuleRepository _store;
         private readonly IRequest<ApplicationRules> _request;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ruleStore"></param>
+        /// <param name="rules"></param>
         public SaveChanges(IRuleRepository ruleStore, IRequest<ApplicationRules> rules)
         {
             _store = ruleStore;
             _request = rules;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Option<string, Exception> Execute()
         {
             var request = _request.BuildRequest();
@@ -49,6 +61,12 @@ namespace Core.UseCases.Rules
             return result;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="propertyName"></param>
+        /// <returns></returns>
         public static object GetPropValue(object source, string propertyName)
         {
             var property = source.GetType().GetRuntimeProperties().FirstOrDefault(p => string.Equals(p.Name, propertyName, StringComparison.OrdinalIgnoreCase));

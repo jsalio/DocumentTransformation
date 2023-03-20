@@ -1,7 +1,7 @@
 ﻿using Core.Contracts;
-using Core.Enum;
 using Core.Models;
 using System;
+using Core.Enums;
 
 namespace Boundaries.Store
 {

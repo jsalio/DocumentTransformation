@@ -21,4 +21,28 @@ export class WorkflowService extends BaseApiService {
   saveChanges = (workflows: Array<Workflow>) => {
     return this.http.post(`${this.controllerUri}/save`, workflows).toPromise();
   }
+
+  getDocumentTypes = (): Promise<Array<WorkflowDocumentSettings>> => {
+    return this.http.get<Array<WorkflowDocumentSettings>>(`${this.controllerUri}/settings`).toPromise()
+  }
+
+  updateSettings = (settings: Array<DocumentType>, workflowId:number) => {
+    return this.http.put(`${this.controllerUri}/${workflowId}/update-settings`, settings).toPromise();
+  }
 }
+
+export interface DocumentType {
+  documentTypeId: number;
+  documentTypeName: string;
+  convertPdf: boolean;
+  supportOcr: boolean;
+  touched?: boolean;
+}
+
+export interface WorkflowDocumentSettings {
+  workflowName: string;
+  workflowId: number;
+  workflowActive: boolean;
+  documentConvertSettings: DocumentType[];
+}
+

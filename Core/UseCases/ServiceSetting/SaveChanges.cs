@@ -1,24 +1,35 @@
-﻿using Core.Contracts;
-using Core.Models;
-using Optional;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+using Core.Contracts;
+using Core.Models;
+using Optional;
 
-namespace Core.UseCase.ServiceSetting
+namespace Core.UseCases.ServiceSetting
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class SaveChanges
     {
         private readonly IServiceConfigStore _store;
         private readonly IRequest<ServiceSettings> _request;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="serviceConfig"></param>
+        /// <param name="request"></param>
         public SaveChanges(IServiceConfigStore serviceConfig, IRequest<ServiceSettings> request)
         {
             _store = serviceConfig;
             _request = request;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<ValidationResult> Validations()
         {
             var request = _request.BuildRequest();
@@ -28,6 +39,10 @@ namespace Core.UseCase.ServiceSetting
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Option<string, Exception> Execute()
         {
             var request = _request.BuildRequest();

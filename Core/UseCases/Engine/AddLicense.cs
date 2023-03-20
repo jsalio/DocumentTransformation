@@ -1,26 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Contracts;
+﻿using Core.Contracts;
 using Core.Models;
 using Core.Models.Exceptions;
 using Optional;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace Core.UseCases.Engine
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class AddLicense
     {
         private readonly IRequest<EngineLicenseRequest> _request;
         private readonly IServiceEngine _repository;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="engineRepository"></param>
+        /// <param name="request"></param>
         public AddLicense(IServiceEngine engineRepository, IRequest<EngineLicenseRequest> request)
         {
             _request = request;
             _repository = engineRepository;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public IEnumerable<ValidationResult> Validate()
         {
             var request = _request.BuildRequest();
@@ -45,6 +55,10 @@ namespace Core.UseCases.Engine
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Option<Task<EngineView>, StoreException> Execute()
         {
             var request = _request.BuildRequest();

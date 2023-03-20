@@ -17,6 +17,7 @@ namespace Boundaries.Store
         DbSet<AttemptDetail> AttemptDetail { get; set; }
         DbSet<PdfEngine> PdfEngines { get; set; }
         DbSet<EngineLicense> EngineLicenses { get; set; }
+        public DbSet<DocumentConvertSetting> DocumentConvertSettings { get; set; }
         Task<int> SaveChanges();
     }
 }

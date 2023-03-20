@@ -7,11 +7,11 @@ using System.Collections.Generic;
 namespace Boundaries.Capture
 {
     /// <summary>
-    /// Class for interct with capture API's
+    /// Class for interact with capture API's
     /// </summary>
     public class WorkflowSource : IWorkflowSource
     {
-        private CaptureApiEndPoints _apiEndPoint;
+        private readonly CaptureApiEndPoints _apiEndPoint;
 
         /// <summary>
         /// 
@@ -32,6 +32,18 @@ namespace Boundaries.Capture
             requestExecutor.AddHeader(new KeyValuePair<string, string>(_apiEndPoint.ApiKeyName, _apiEndPoint.XApiKeyValue));
             var dataSet = requestExecutor.Get<IEnumerable<Workflow>>(_apiEndPoint.Workflow,"/api/Workflows");
             return dataSet;
+        }
+
+        /// <summary>
+        /// <inheritdoc/>
+        /// </summary>
+        /// <returns></returns>
+        WorkflowDocumentTypes IWorkflowSource.GetDocumentTypes(long workflowId)
+        {
+            var requestExecutor = new ExecuteRequest();
+            requestExecutor.AddHeader(new KeyValuePair<string, string>(_apiEndPoint.ApiKeyName, _apiEndPoint.XApiKeyValue));
+            var workflow = requestExecutor.Get<WorkflowDocumentTypes>(_apiEndPoint.Workflow,$"/api/Workflows/{workflowId}/document-types");
+            return workflow;
         }
     }
 }

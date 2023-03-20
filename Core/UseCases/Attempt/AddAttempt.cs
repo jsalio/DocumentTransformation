@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Threading.Tasks;
-using Core.Contracts;
+﻿using Core.Contracts;
 using Core.Models.Attempts;
 using Core.Models.Exceptions;
 using Optional;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 
 namespace Core.UseCases.Attempt
 {

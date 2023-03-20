@@ -1,20 +1,31 @@
-﻿using Core.Contracts;
+﻿using System;
+using Core.Contracts;
 using Core.Models;
 using Core.Models.Exceptions;
 using Optional;
-using System;
 
-namespace Core.UseCase.ServiceSetting
+namespace Core.UseCases.ServiceSetting
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public sealed class GetApplicationSettings
     {
         private readonly IServiceConfigStore _store;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="store"></param>
         public GetApplicationSettings(IServiceConfigStore store)
         {
             _store = store;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Option<ServiceSettings, CoreException> Execute()
         {
             try

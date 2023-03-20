@@ -1,5 +1,7 @@
-﻿using Core.Models;
+﻿using System;
+using Core.Models;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 
 namespace Core.Contracts
@@ -23,7 +25,10 @@ namespace Core.Contracts
         Task<int> Delete(int id);
         Task<int> DeleteMany(IEnumerable<int> id);
         Task<int> SaveMany(IEnumerable<Workflow> workflows);
-
+        Task<Workflow> SaveDocumentTypeSetting(IEnumerable<DocumentConvertSetting> request);
+        bool Exists(Expression<Func<Workflow, bool>> expression);
+        Task<List<Workflow>> GetAllSettings();
+        Task<int> UpdateDocumentTypeSettings(IEnumerable<DocumentConvertSettingModel> request);
     }
 
 }

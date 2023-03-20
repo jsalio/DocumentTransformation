@@ -40,14 +40,14 @@
               </tr>
           </thead>
           <tbody>
-              <tr *ngFor="let document of details.documentTypes" >
+              <tr *ngFor="let document of details.documentConvertSettings" >
                   <td>{{document.documentTypeId}}</td>
                   <td>{{document.documentTypeName}}</td>
                   <td>
-                    <input type="checkbox" (change)="onRowSelect($event,document,'PDF')" [checked]="document.PDF">
+                    <input type="checkbox" (change)="onRowSelect($event,document,'PDF')" [checked]="document.convertPdf">
                   </td>
                   <td>
-                    <input type="checkbox" (change)="onRowSelect($event,document,'OCR')" [checked]="document.OCR">
+                    <input type="checkbox" (change)="onRowSelect($event,document,'OCR')" [checked]="document.supportOcr">
                   </td>
               </tr>
           </tbody>
@@ -55,7 +55,7 @@
               <tr>
                   <td colspan="4">
                     <div class="btn-group">
-                      <button  class="btn btn-sm btn-secondary" [disabled]="!dataSetChange">
+                      <button (click)="saveUpdateSettings(details.workflowId)" class="btn btn-sm btn-secondary" [disabled]="!dataSetChange">
                         <cds-icon *ngIf="!dataSetChange" shape="floppy"></cds-icon>
                         <cds-icon  *ngIf="dataSetChange" shape="floppy" badge="info"></cds-icon>
                         {{'SaveChanges'| translate}}

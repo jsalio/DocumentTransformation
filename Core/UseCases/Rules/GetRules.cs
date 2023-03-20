@@ -2,20 +2,29 @@
 using Core.Models;
 using Optional;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Core.UseCase.Rules
+namespace Core.UseCases.Rules
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class GetRules
     {
         private readonly IRuleRepository _store;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ruleStore"></param>
         public GetRules(IRuleRepository ruleStore)
         {
             _store = ruleStore;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public Option<ApplicationRules, Exception> Execute()
         {
             try

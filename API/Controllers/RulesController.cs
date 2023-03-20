@@ -23,7 +23,7 @@ namespace DocumentTransformation.Controllers
         [Route("current")]
         public ActionResult GetCurrentRules()
         {
-            Core.UseCase.Rules.GetRules getRules = new Core.UseCase.Rules.GetRules(_store);
+            GetRules getRules = new GetRules(_store);
             var current = getRules.Execute();
             ValidateResult(current);
             return Ok(current.ValueOrFailure());

@@ -8,7 +8,8 @@ namespace Boundaries.Store
 {
     public class ApplicationDbContext : DbContext, IApplicationDbContext
     {
-        public DbSet<Workflow> Workflows { get; set; }  
+        public DbSet<Workflow> Workflows { get; set; } 
+        public DbSet<DocumentConvertSetting> DocumentConvertSettings { get; set; }
         public DbSet<Rule> Rules { get ; set; }
         public DbSet<ServiceSettings> ServiceSettings { get; set; }
         public DbSet<Attempt> Attempt { get; set; } 
@@ -26,7 +27,7 @@ namespace Boundaries.Store
 
         async Task<int> IApplicationDbContext.SaveChanges()
         {
-           return await base.SaveChangesAsync();
+            return await base.SaveChangesAsync();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -37,6 +38,10 @@ namespace Boundaries.Store
                 model.HasKey(x => x.Id);
                 model.Property(x => x.Handle).IsRequired();
                 model.Property(x => x.Name).IsRequired();
+                model.HasMany(x => x.DocumentConvertSettings)
+                    .WithOne(x => x.Workflow)
+                    .HasForeignKey(x => x.WorkflowId);
+
             }).Entity<ServiceSettings>(model =>
             {
                 model.HasKey(x => x.Id);
@@ -46,6 +51,7 @@ namespace Boundaries.Store
             {
                 model.HasKey(x => x.Id);
                 model.Property(x => x.Name);
+
             }).Entity<Attempt>(model =>
             {
                 model.HasKey(x => x.Id);
@@ -53,12 +59,14 @@ namespace Boundaries.Store
                 model.HasMany<AttemptDetail>(a => a.AttemptDetails)
                     .WithOne(d => d.Attempt)
                     .HasForeignKey(x => x.AttemptId);
+
             }).Entity<AttemptDetail>(model =>
             {
                 model.HasKey(x => x.Id);
                 model.HasIndex(x => x.AttemptId);
                 model.Property(x => x.ErrorDetails).IsRequired();
                 model.Property(x => x.RegistryDate).IsRequired();
+
             }).Entity<PdfEngine>(model =>
             {
                 model.HasKey(x => x.Id);
@@ -68,10 +76,18 @@ namespace Boundaries.Store
                 model.HasOne(x => x.EngineLicense)
                     .WithOne(x => x.PdfEngine)
                     .HasForeignKey<EngineLicense>(x => x.EngineId);
+
             }).Entity<EngineLicense>(model =>
             {
                 model.HasKey(x => x.Id);
                 model.Property(x => x.LicenseString).HasColumnType("Text").HasMaxLength(20000000);
+
+            }).Entity<DocumentConvertSetting>(model =>
+            {
+                model.HasKey(x => x.Id);
+                model.HasIndex(x => x.DocumentTypeId);
+                model.HasIndex(x => x.DocumentTypeName);
+
             });
         }
     }
