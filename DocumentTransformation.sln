@@ -1,17 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.4.33205.214
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30330.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DocumentTransformation", "API\DocumentTransformation.csproj", "{BB9506DF-7275-4826-B9BB-1061048365E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{FC9A1F92-51A0-415F-9F7B-1244D7B6ACDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{FC9A1F92-51A0-415F-9F7B-1244D7B6ACDD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boundaries.Store", "Boundaries.Store\Boundaries.Store.csproj", "{E3428D12-EB31-4E6B-AEEF-8BCBD5527272}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boundaries.Capture", "Boundaries.Capture\Boundaries.Capture.csproj", "{44E168C2-9E03-4960-82D8-5CA3A87D96D7}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boundaries.Request", "Boundaries.Request\Boundaries.Request.csproj", "{DDC7A1E0-662C-4092-9FB2-E18F211387B5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrasnsformerSvc", "TrasnsformerSvc\TrasnsformerSvc.csproj", "{8F4BA359-5BEC-4B03-9CA1-BF3702E0F320}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Boundaries.Logger", "Boundaries.Logger\Boundaries.Logger.csproj", "{C75B0697-E4BA-48B0-859E-FD359BDC9790}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boundaries.DocumentTransformation", "Boundaries.DocumentTransformation\Boundaries.DocumentTransformation.csproj", "{17FF2846-2FDC-40DE-AF82-A30CB1353464}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Boundaries.PdfEngine", "Boundaries.PdfEngine\Boundaries.PdfEngine.csproj", "{5F554AA0-2429-41AA-BED9-D5FF5EC29226}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +47,22 @@ Global
 		{DDC7A1E0-662C-4092-9FB2-E18F211387B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDC7A1E0-662C-4092-9FB2-E18F211387B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDC7A1E0-662C-4092-9FB2-E18F211387B5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F4BA359-5BEC-4B03-9CA1-BF3702E0F320}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F4BA359-5BEC-4B03-9CA1-BF3702E0F320}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F4BA359-5BEC-4B03-9CA1-BF3702E0F320}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F4BA359-5BEC-4B03-9CA1-BF3702E0F320}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C75B0697-E4BA-48B0-859E-FD359BDC9790}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C75B0697-E4BA-48B0-859E-FD359BDC9790}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C75B0697-E4BA-48B0-859E-FD359BDC9790}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C75B0697-E4BA-48B0-859E-FD359BDC9790}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17FF2846-2FDC-40DE-AF82-A30CB1353464}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17FF2846-2FDC-40DE-AF82-A30CB1353464}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17FF2846-2FDC-40DE-AF82-A30CB1353464}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17FF2846-2FDC-40DE-AF82-A30CB1353464}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5F554AA0-2429-41AA-BED9-D5FF5EC29226}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F554AA0-2429-41AA-BED9-D5FF5EC29226}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F554AA0-2429-41AA-BED9-D5FF5EC29226}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F554AA0-2429-41AA-BED9-D5FF5EC29226}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

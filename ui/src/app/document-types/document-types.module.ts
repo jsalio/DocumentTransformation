@@ -7,6 +7,7 @@ import { ClarityModule } from '@clr/angular';
 import { ListOfWorkflowsComponent } from './components/list-of-workflows/list-of-workflows.component';
 import { WorkflowService } from '../services/workflow.service';
 import { NotificationService } from '../shared/notification/notification.service';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms'
 
 @NgModule({
   declarations: [
@@ -17,6 +18,8 @@ import { NotificationService } from '../shared/notification/notification.service
     CommonModule,
     DocumentTypeRoutingModule,
     SharedModule,
+    FormsModule,
+    ReactiveFormsModule,
     ClarityModule
   ],
   providers:[WorkflowService, NotificationService]

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Core.Enums;
+﻿using Core.Enums;
+using System;
 
 namespace Core.Models
 {

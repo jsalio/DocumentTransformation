@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Threading.Tasks;
 using Core.Contracts;
 using Core.Models;
 using Optional;
@@ -43,18 +44,18 @@ namespace Core.UseCases.ServiceSetting
         /// 
         /// </summary>
         /// <returns></returns>
-        public Option<string, Exception> Execute()
+        public Option<Task<int>, Exception> Execute()
         {
             var request = _request.BuildRequest();
             try
             {
                 var result = _store.Save(request);
-                return Option.Some<string, Exception>(result);
+                return Option.Some<Task<int>, Exception>(result);
             }
             catch (Exception e)
             {
 
-                return Option.None<string, Exception>(e);
+                return Option.None<Task<int>, Exception>(e);
             }
         }
     }

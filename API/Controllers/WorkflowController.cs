@@ -62,12 +62,17 @@ namespace DocumentTransformation.Controllers
                 DocumentTypeName = x.DocumentTypeName,
                 SupportOcr = false
             });
+            if (!_dataSet.Any())
+            {
+                return Ok();
+            }
             SaveDocumentType saveDocumentType = new SaveDocumentType(_store, this);
             ValidateRequestResult(saveDocumentType.Validate());
             var execute = saveDocumentType.Execute();
             ValidateResult(execute);
             var workflow = await execute.ValueOrFailure();
-            return Ok(workflow);
+            var l = new List<Workflow>() {workflow};
+            return Ok(MapToModel(l));
         }
 
         [Route("save")]

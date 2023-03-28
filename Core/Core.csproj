@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="UseCases\ServiceSetting\" />
     <Folder Include="UseCases\Rules\" />
   </ItemGroup>
 

@@ -1,5 +1,4 @@
 ﻿using RestSharp;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -63,4 +62,5 @@ namespace Boundaries.Request
             headers.Add(keyValuePair);
         }
     }
+
 }

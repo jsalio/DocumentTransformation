@@ -1,11 +1,13 @@
-﻿using Core.Models;
+﻿using System.Threading.Tasks;
+using Core.Models;
 
 namespace Core.Contracts
 {
     public interface IServiceConfigStore
     {
-        string Save(ServiceSettings queue);
+        Task<int> Save(ServiceSettings queue);
         ServiceSettings GetSettings();
+        ApplicationSettings GetApplicartionSetting();
     }
 
 }

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Workflow } from '../shared/models/Workflow';
 import BaseApiService from './base.service';
+import { id } from '@cds/core/internal';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,10 @@ export class WorkflowService extends BaseApiService {
 
   updateSettings = (settings: Array<DocumentType>, workflowId:number) => {
     return this.http.put(`${this.controllerUri}/${workflowId}/update-settings`, settings).toPromise();
+  }
+
+  addAddWorkflow = (workflowId: number) => {
+  return this.http.post(`${this.controllerUri}/${workflowId}/add`, null).toPromise();
   }
 }
 

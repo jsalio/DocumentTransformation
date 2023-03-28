@@ -95,11 +95,36 @@ namespace Boundaries.Store.Repository
 
         Task<int> IContract.SaveMany(IEnumerable<Core.Models.Workflow> workflows)
         {
-            foreach (var workflow in workflows)
+
+            try
             {
-                _context.Workflows.Add(workflow);
+                var workflowsId = workflows.Select(x => x.Handle).ToList();
+                var current = _context.Workflows.Select(x => x.Handle).ToList();
+                
+                var removeItems = current.Where(x => !workflowsId.Contains(x)).ToList();
+                var newItems = workflowsId.Where(x => !current.Contains(x)).ToList();
+
+                var forRemove = _context.Workflows.Where(x => removeItems.Contains(x.Handle));
+                var newSettings = workflows.Where(x => newItems.Contains(x.Handle));
+
+                foreach (var workflow in newSettings)
+                {
+                    _context.Workflows.Add(workflow);
+                }
+                return _context.SaveChanges();
             }
-            return _context.SaveChanges();
+            catch (DbUpdateConcurrencyException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (ArgumentException e)
+            {
+                throw new Exception(e.Message);
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         Task<int> IContract.UpdateDocumentTypeSettings(IEnumerable<DocumentConvertSettingModel> request)
